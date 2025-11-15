@@ -8,6 +8,6 @@ use Illuminate\Http\Request;
 class HomeFrontendController extends Controller
 {
     public function index(){
-        return view('page.frontend.home.index');
+        return view('page.frontend.mart.landing.index');
     }
 }
