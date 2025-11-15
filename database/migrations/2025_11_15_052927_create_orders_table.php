@@ -21,14 +21,16 @@ return new class extends Migration
 
             $table->integer('total_cost')->default(0);
             $table->integer('discount')->default(0);
-            $table->integer('grand_amount')->default(0);
+
+            $table->integer('paid_amount')->default(0);
+
             $table->integer('change_amount')->default(0);
 
             $table->enum('payment_method', ['cash','transfer','qris'])->default('cash');
             $table->enum('is_paid', ['paid','unpaid'])->default('unpaid');
 
-            $table->enum('status', ['accept','on_progress','ready','finished','canceled'])
-                  ->default('accept');
+            $table->enum('status', ['accepted','in_progress','served','finished','cancelled'])
+                  ->default('accepted');
 
             $table->dateTime('paid_date')->nullable();
             $table->text('note')->nullable();
