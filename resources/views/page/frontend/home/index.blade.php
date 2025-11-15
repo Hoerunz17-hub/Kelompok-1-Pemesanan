@@ -136,7 +136,7 @@
                     </li>
                 </ul>
 
-                <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+                <button class="w-100 btn btn-primary btn-lg" type="submit">Continuemmjjjjj to checkout</button>
             </div>
         </div>
     </div>
