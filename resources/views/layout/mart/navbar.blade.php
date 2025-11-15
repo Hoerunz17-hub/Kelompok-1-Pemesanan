@@ -73,28 +73,6 @@
                   <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
 
-                <div class="offcanvas-body justify-content-center">
-
-                  <ul class="navbar-nav justify-content-end menu-list list-unstyled d-flex gap-md-3 mb-0">
-                    <li class="nav-item active">
-                      <a href="/mart/home" class="nav-link">Home</a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="#kids" class="nav-link">Chackout</a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="#accessories" class="nav-link">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="#brand" class="nav-link">Brand</a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="#blog" class="nav-link">Blog</a>
-                    </li>
-                  </ul>
-
-                </div>
-
               </div>
           </div>
         </div>
