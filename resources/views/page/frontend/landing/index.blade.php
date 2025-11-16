@@ -1086,8 +1086,7 @@
 
                                     <div class="col">
                                         <div class="product-item">
-                                            <a href="#" class="btn-wishlist"><svg width="24"
-                                                    height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -1133,8 +1132,7 @@
 
                                     <div class="col">
                                         <div class="product-item">
-                                            <a href="#" class="btn-wishlist"><svg width="24"
-                                                    height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -1222,7 +1220,8 @@
                                     <div class="col">
                                         <div class="product-item">
                                             <span class="badge bg-success position-absolute m-3">-30%</span>
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -1269,7 +1268,8 @@
                                     <div class="col">
                                         <div class="product-item">
                                             <span class="badge bg-success position-absolute m-3">-30%</span>
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -1315,7 +1315,8 @@
 
                                     <div class="col">
                                         <div class="product-item">
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -1361,7 +1362,8 @@
 
                                     <div class="col">
                                         <div class="product-item">
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -1407,7 +1409,8 @@
 
                                     <div class="col">
                                         <div class="product-item">
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -1453,7 +1456,8 @@
 
                                     <div class="col">
                                         <div class="product-item">
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -1499,7 +1503,8 @@
 
                                     <div class="col">
                                         <div class="product-item">
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -1545,7 +1550,8 @@
 
                                     <div class="col">
                                         <div class="product-item">
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -1591,7 +1597,8 @@
 
                                     <div class="col">
                                         <div class="product-item">
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -1637,7 +1644,8 @@
 
                                     <div class="col">
                                         <div class="product-item">
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -1686,7 +1694,8 @@
 
                             </div>
 
-                            <div class="tab-pane fade" id="nav-fruits" role="tabpanel" aria-labelledby="nav-fruits-tab">
+                            <div class="tab-pane fade" id="nav-fruits" role="tabpanel"
+                                aria-labelledby="nav-fruits-tab">
 
                                 <div
                                     class="product-grid row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
@@ -1694,7 +1703,8 @@
                                     <div class="col">
                                         <div class="product-item">
                                             <span class="badge bg-success position-absolute m-3">-30%</span>
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -1741,7 +1751,8 @@
                                     <div class="col">
                                         <div class="product-item">
                                             <span class="badge bg-success position-absolute m-3">-30%</span>
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -1788,7 +1799,8 @@
                                     <div class="col">
                                         <div class="product-item">
                                             <span class="badge bg-success position-absolute m-3">-30%</span>
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -1834,7 +1846,8 @@
 
                                     <div class="col">
                                         <div class="product-item">
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -1880,7 +1893,8 @@
 
                                     <div class="col">
                                         <div class="product-item">
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -1926,7 +1940,8 @@
 
                                     <div class="col">
                                         <div class="product-item">
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -1974,14 +1989,16 @@
                                 <!-- / product-grid -->
 
                             </div>
-                            <div class="tab-pane fade" id="nav-juices" role="tabpanel" aria-labelledby="nav-juices-tab">
+                            <div class="tab-pane fade" id="nav-juices" role="tabpanel"
+                                aria-labelledby="nav-juices-tab">
 
                                 <div
                                     class="product-grid row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
 
                                     <div class="col">
                                         <div class="product-item">
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -2027,7 +2044,8 @@
 
                                     <div class="col">
                                         <div class="product-item">
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -2073,7 +2091,8 @@
 
                                     <div class="col">
                                         <div class="product-item">
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -2119,7 +2138,8 @@
 
                                     <div class="col">
                                         <div class="product-item">
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -2283,11 +2303,8 @@
                             <nav>
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                     <a href="#" class="nav-link text-uppercase fs-6 active" id="nav-all-tab"
-                                        data-bs-toggle="tab" data-bs-target="#nav-all">All</a>
-                                    <a href="#" class="nav-link text-uppercase fs-6" id="nav-fruits-tab"
-                                        data-bs-toggle="tab" data-bs-target="#nav-fruits">Fruits & Veges</a>
-                                    <a href="#" class="nav-link text-uppercase fs-6" id="nav-juices-tab"
-                                        data-bs-toggle="tab" data-bs-target="#nav-juices">Juices</a>
+                                        data-bs-toggle="tab" data-bs-target="#nav-all">Dessert</a>
+
                                 </div>
                             </nav>
                         </div>
@@ -2301,7 +2318,8 @@
                                     <div class="col">
                                         <div class="product-item">
                                             <span class="badge bg-success position-absolute m-3">-30%</span>
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -2348,7 +2366,8 @@
                                     <div class="col">
                                         <div class="product-item">
                                             <span class="badge bg-success position-absolute m-3">-30%</span>
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -2394,7 +2413,8 @@
 
                                     <div class="col">
                                         <div class="product-item">
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -2440,7 +2460,8 @@
 
                                     <div class="col">
                                         <div class="product-item">
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -2486,7 +2507,8 @@
 
                                     <div class="col">
                                         <div class="product-item">
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -2532,7 +2554,8 @@
 
                                     <div class="col">
                                         <div class="product-item">
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -2578,7 +2601,8 @@
 
                                     <div class="col">
                                         <div class="product-item">
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -2624,7 +2648,8 @@
 
                                     <div class="col">
                                         <div class="product-item">
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -2670,7 +2695,8 @@
 
                                     <div class="col">
                                         <div class="product-item">
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -2716,7 +2742,8 @@
 
                                     <div class="col">
                                         <div class="product-item">
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -2765,7 +2792,8 @@
 
                             </div>
 
-                            <div class="tab-pane fade" id="nav-fruits" role="tabpanel" aria-labelledby="nav-fruits-tab">
+                            <div class="tab-pane fade" id="nav-fruits" role="tabpanel"
+                                aria-labelledby="nav-fruits-tab">
 
                                 <div
                                     class="product-grid row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
@@ -2773,7 +2801,8 @@
                                     <div class="col">
                                         <div class="product-item">
                                             <span class="badge bg-success position-absolute m-3">-30%</span>
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -2820,7 +2849,8 @@
                                     <div class="col">
                                         <div class="product-item">
                                             <span class="badge bg-success position-absolute m-3">-30%</span>
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -2867,7 +2897,8 @@
                                     <div class="col">
                                         <div class="product-item">
                                             <span class="badge bg-success position-absolute m-3">-30%</span>
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -2913,7 +2944,8 @@
 
                                     <div class="col">
                                         <div class="product-item">
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -2959,7 +2991,8 @@
 
                                     <div class="col">
                                         <div class="product-item">
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -3005,7 +3038,8 @@
 
                                     <div class="col">
                                         <div class="product-item">
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -3053,14 +3087,16 @@
                                 <!-- / product-grid -->
 
                             </div>
-                            <div class="tab-pane fade" id="nav-juices" role="tabpanel" aria-labelledby="nav-juices-tab">
+                            <div class="tab-pane fade" id="nav-juices" role="tabpanel"
+                                aria-labelledby="nav-juices-tab">
 
                                 <div
                                     class="product-grid row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
 
                                     <div class="col">
                                         <div class="product-item">
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -3106,7 +3142,8 @@
 
                                     <div class="col">
                                         <div class="product-item">
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -3152,7 +3189,8 @@
 
                                     <div class="col">
                                         <div class="product-item">
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -3198,7 +3236,8 @@
 
                                     <div class="col">
                                         <div class="product-item">
-                                            <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                                            <a href="#" class="btn-wishlist"><svg width="24"
+                                                    height="24">
                                                     <use xlink:href="#heart"></use>
                                                 </svg></a>
                                             <figure>
@@ -3345,6 +3384,42 @@
                     </div>
 
                 </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-5">
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="banner-ad bg-danger mb-3"
+                        style="background: url('images/ad-image-3.png');background-repeat: no-repeat;background-position: right bottom;">
+                        <div class="banner-content p-5">
+
+                            <div class="categories text-primary fs-3 fw-bold">Upto 25% Off</div>
+                            <h3 class="banner-title">Luxa Dark Chocolate</h3>
+                            <p>Very tasty & creamy vanilla flavour creamy muffins.</p>
+                            <a href="#" class="btn btn-dark text-uppercase">Show Now</a>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="banner-ad bg-info"
+                        style="background: url('images/ad-image-4.png');background-repeat: no-repeat;background-position: right bottom;">
+                        <div class="banner-content p-5">
+
+                            <div class="categories text-primary fs-3 fw-bold">Upto 25% Off</div>
+                            <h3 class="banner-title">Creamy Muffins</h3>
+                            <p>Very tasty & creamy vanilla flavour creamy muffins.</p>
+                            <a href="#" class="btn btn-dark text-uppercase">Show Now</a>
+
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
