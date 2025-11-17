@@ -8,25 +8,26 @@ use App\Http\Controllers\Backend\UserBackendController;
 use App\Http\Controllers\Frontend\HomeFrontendController;
 use Illuminate\Support\Facades\Route;
 
+// ========== FRONTEND ==========
+Route::get('/', [HomeFrontendController::class, 'index']);
 
-Route::get('/',[HomeFrontendController::class,'index']);
+// ========== LOGIN ==========
+Route::get('/login', [LoginBackendController::class, 'login'])->name('login');
 
-//ROUTE LOGIN
-Route::get('/login',[LoginBackendController::class,'login']);
+// ========== DASHBOARD ==========
+Route::get('/adminpanel', [DashboardBackendController::class, 'index'])->name('backend.dashboard');
 
-//BACKEND USER
-Route::get('/adminpanel',[DashboardBackendController::class,'index']);
-Route::get('/user',[UserBackendController::class,'index']);
-Route::get('/user/create',[UserBackendController::class,'create']);
-Route::get('/user/edit',[UserBackendController::class,'edit']);
+// ========== USER CRUD ==========
+Route::resource('/user', UserBackendController::class, [
+    'as' => 'backend'  // route name: backend.user.index, backend.user.create, dll
+]);
 
+// ========== PRODUCT CRUD ==========
+Route::resource('/product', ProductBackendController::class, [
+    'as' => 'backend'
+]);
 
-//BACKEND ORDER
-Route::get('/order',[OrderBackendController::class,'index']);
-Route::get('/order/detail',[OrderBackendController::class,'detail']);
-Route::get('/order/payment',[OrderBackendController::class,'payment']);
-
-//BACKEND PRODUCT
-Route::get('/product',[ProductBackendController::class,'index']);
-Route::get('/product/create',[ProductBackendController::class,'create']);
-Route::get('/product/edit',[ProductBackendController::class,'edit']);
+// ========== ORDER (Custom karena berbeda struktur) ==========
+Route::get('/order', [OrderBackendController::class, 'index'])->name('backend.order.index');
+Route::get('/order/detail/{id}', [OrderBackendController::class, 'detail'])->name('backend.order.detail');
+Route::get('/order/payment/{id}', [OrderBackendController::class, 'payment'])->name('backend.order.payment');

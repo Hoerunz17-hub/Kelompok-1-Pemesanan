@@ -18,15 +18,16 @@ class Order extends Model
         'order_date',
         'total_cost',
         'discount',
-        'grand_amount',
+        'paid_amount',
         'change_amount',
         'payment_method',
         'is_paid',
         'status',
         'paid_date',
-        'note'
+        'note',
     ];
 
+    // RELATION KE USER
     public function waiter()
     {
         return $this->belongsTo(User::class, 'waiters_id');
@@ -37,7 +38,8 @@ class Order extends Model
         return $this->belongsTo(User::class, 'casier_id');
     }
 
-    public function orderDetails()
+    // RELATION KE ORDER DETAIL
+    public function details()
     {
         return $this->hasMany(OrderDetail::class);
     }
