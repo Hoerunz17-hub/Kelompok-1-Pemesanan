@@ -16,92 +16,110 @@ class ProductBackendController extends Controller
         return view('page.backend.product.index', compact('products'));
     }
 
-    // 📌 Form tambah produk
+   // 📌 Form create
     public function create()
     {
-        return view('page.backend.product.create');
+        $products = Product::all(); // mengikuti pola Aboutus::all()
+        return view('page.backend.product.create', compact('products'));
     }
 
-    // 📌 Proses tambah produk
+    // 📌 Store data baru
     public function store(Request $request)
     {
         $request->validate([
             'name'      => 'required|string|max:255',
             'price'     => 'required|integer|min:0',
-            'is_active' => 'required|in:active,nonactive',
+
             'image'     => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
         ]);
 
-        $imagePath = null;
-
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('products', 'public');
-        }
-
-        Product::create([
-            'image'     => $imagePath,
+        $dataproduct_store = [
             'name'      => $request->name,
             'price'     => $request->price,
-            'is_active' => $request->is_active,
-        ]);
 
-        return redirect()->route('backend.product.index')->with('success', 'Produk berhasil ditambahkan');
+        ];
+
+        if ($request->hasFile('image')) {
+            $dataproduct_store['image'] = $request->file('image')->store('products', 'public');
+        }
+
+        Product::create($dataproduct_store);
+
+        return redirect('/product')->with('success', 'Produk berhasil ditambahkan');
     }
 
-    // 📌 Form edit produk
+    // 📌 Delete data
+    public function destroy($id)
+    {
+        $product = Product::find($id);
+
+        if ($product) {
+
+            if ($product->image && Storage::disk('public')->exists($product->image)) {
+                Storage::disk('public')->delete($product->image);
+            }
+
+            $product->delete();
+
+            return redirect()->route('backend.product.index')->with('success', 'Produk berhasil dihapus');
+        }
+    }
+
+    // 📌 Form edit
     public function edit($id)
     {
-        $product = Product::findOrFail($id);
+        $product = Product::find($id);
+
+        if (!$product) {
+            return redirect('/product')->with('error', 'Produk tidak ditemukan');
+        }
+
         return view('page.backend.product.edit', compact('product'));
     }
 
-    // 📌 Proses update produk
+    // 📌 Update produk
     public function update(Request $request, $id)
     {
         $request->validate([
             'name'      => 'required|string|max:255',
             'price'     => 'required|integer|min:0',
-            'is_active' => 'required|in:active,nonactive',
+
             'image'     => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
         ]);
 
-        $product = Product::findOrFail($id);
+        $product = Product::find($id);
 
-        $imagePath = $product->image;
+        $dataproduct_update = [
+            'name'      => $request->name,
+            'price'     => $request->price,
 
-        // Jika upload gambar baru
+        ];
+
         if ($request->hasFile('image')) {
 
-            // hapus gambar lama
-            if ($product->image && Storage::disk('public')->exists($product->image)) {
+            if ($product->image) {
                 Storage::disk('public')->delete($product->image);
             }
 
-            // simpan gambar baru
-            $imagePath = $request->file('image')->store('products', 'public');
+            $dataproduct_update['image'] = $request->file('image')->store('products', 'public');
         }
 
-        $product->update([
-            'image'     => $imagePath,
-            'name'      => $request->name,
-            'price'     => $request->price,
-            'is_active' => $request->is_active,
-        ]);
+        $product->update($dataproduct_update);
 
-        return redirect()->route('backend.product.index')->with('success', 'Produk berhasil diperbarui');
+        return redirect('/product')->with('success', 'Produk berhasil diperbarui');
     }
 
-    // 📌 Hapus produk
-    public function destroy($id)
+    // 📌 Toggle status
+    public function toggle(Request $request, $id)
     {
         $product = Product::findOrFail($id);
 
-        if ($product->image && Storage::disk('public')->exists($product->image)) {
-            Storage::disk('public')->delete($product->image);
-        }
+        $product->is_active = $request->status == 1 ? 'active' : 'nonactive';
+        $product->save();
 
-        $product->delete();
-
-        return redirect()->route('backend.product.index')->with('success', 'Produk berhasil dihapus');
+        return response()->json([
+            'success' => true,
+            'is_active' => $product->is_active
+        ]);
     }
 }

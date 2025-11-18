@@ -18,41 +18,53 @@
                                     <th scope="col">IMAGE</th>
                                     <th scope="col">NAME</th>
                                     <th scope="col">PRICE</th>
-
                                     <th scope="col">STATUS</th>
                                     <th scope="col">ACTION</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td><img src="{{ asset('assetsbackend/images/logo-icon.png') }}" alt="photo"
-                                            class="img-fluid rounded" style="width:80px; height:50px; object-fit:cover;">
+                                @if ($products->isEmpty())
+                                    <tr>
+                                        <td colspan="8" class="text-center">Product Not Found</td>
+                                    </tr>
+                                @endif
+                                @foreach ($products as $product)
+                                    <tr>
+                                        <th scope="row">{{ $product->id }}</th>
+                                        <td>
+                                            @if ($product->image)
+                                                <img src="{{ asset('storage/' . $product->image) }}" alt="Product Image"
+                                                    class="product-img"
+                                                    style="width:160px; height:100px; object-fit:cover; border-radius:8px;">
+                                            @else
+                                                <span class="text-muted">No image</span>
+                                            @endif
+                                        </td>
+                                        <td>{{ $product->name }}</td>
+                                        <td>{{ $product->price }}</td>
 
-                                    </td>
-                                    <td>Otto</td>
-                                    <td>5678</td>
+                                        <td> <label class="switch">
+                                                <input type="checkbox" class="toggle-status" data-id="{{ $product->id }}"
+                                                    {{ $product->is_active === 'active' ? 'checked' : '' }}>
+                                                <span class="slider round"></span>
+                                            </label></td>
+                                        <td>
+                                            <a href="#" class="btn-view">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
 
-                                    <td> <label class="switch">
-                                            <input type="checkbox" class="toggle-status">
-                                            <span class="slider round"></span>
-                                        </label></td>
-                                    <td>
-                                        <a href="#" class="btn-view">
-                                            <i class="fa fa-eye"></i>
-                                        </a>
+                                            <a href="/product/edit/{{ $product->id }}" class="btn-edit">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
 
-                                        <a href="/product/edit" class="btn-edit">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
+                                            <a href="/product/delete/{{ $product->id }}" class="btn-delete"
+                                                onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                        </td>
 
-                                        <a href="#" class="btn-delete">
-                                            <i class="fa fa-trash"></i>
-                                        </a>
-                                    </td>
-
-                                </tr>
-
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -216,4 +228,29 @@
             background: linear-gradient(to right, #182f5c, #24467f);
         }
     </style>
+    {{-- Script --}}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".toggle-status").forEach(toggle => {
+                toggle.addEventListener("change", function() {
+                    let productId = this.dataset.id;
+                    let status = this.checked ? 1 : 0;
+
+                    fetch(`/product/toggle/${productId}`, {
+                            method: "POST",
+                            headers: {
+                                "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({
+                                status: status
+                            })
+                        })
+                        .then(res => res.json())
+                        .then(data => console.log("Status updated:", data))
+                        .catch(err => console.error("Error:", err));
+                });
+            });
+        });
+    </script>
 @endsection
