@@ -61,7 +61,7 @@ class ProductBackendController extends Controller
 
             $product->delete();
 
-            return redirect()->route('backend.product.index')->with('success', 'Produk berhasil dihapus');
+            return redirect('/product')->with('success', 'Produk berhasil dihapus');
         }
     }
 

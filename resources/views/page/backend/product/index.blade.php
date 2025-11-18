@@ -41,7 +41,8 @@
                                             @endif
                                         </td>
                                         <td>{{ $product->name }}</td>
-                                        <td>{{ $product->price }}</td>
+                                        <td>Rp {{ number_format($product->price, 0, ',', '.') }}</td>
+
 
                                         <td> <label class="switch">
                                                 <input type="checkbox" class="toggle-status" data-id="{{ $product->id }}"
