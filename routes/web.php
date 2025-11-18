@@ -23,9 +23,13 @@ Route::resource('/user', UserBackendController::class, [
 ]);
 
 // ========== PRODUCT CRUD ==========
-Route::resource('/product', ProductBackendController::class, [
-    'as' => 'backend'
-]);
+Route::get('/product', [ProductBackendController::class,'index']);
+Route::get('/product/create', [ProductBackendController::class,'create']);
+Route::post('/product/store', [ProductBackendController::class,'store']);
+Route::get('/product/delete/{id}', [ProductBackendController::class,'destroy']);
+Route::get('/product/edit/{id}', [ProductBackendController::class,'edit']);
+Route::post('/product/update/{id}', [ProductBackendController::class,'update']);
+Route::post('/product/toggle/{id}', [ProductBackendController::class,'toggle']);
 
 // ========== ORDER (Custom karena berbeda struktur) ==========
 Route::get('/order', [OrderBackendController::class, 'index'])->name('backend.order.index');

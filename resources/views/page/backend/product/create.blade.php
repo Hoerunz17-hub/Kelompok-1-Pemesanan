@@ -6,28 +6,33 @@
 
             <div class="card">
                 <div class="card-body">
-                    <div class="card-title">Create User</div>
+                    <div class="card-title">Create Product</div>
                     <hr>
-                    <form>
+                    <form action="/product/store" method="POST" enctype="multipart/form-data">
+                        @csrf
                         <div class="form-group">
-                            <label for="input-6">Name</label>
-                            <input type="text" class="form-control form-control-rounded" id="input-6"
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control form-control-rounded" id="name" name="name"
                                 placeholder="Enter Your Name">
                         </div>
                         <div class="form-group">
-                            <label for="input-7">PRICE</label>
-                            <input type="number" class="form-control form-control-rounded" id="input-7">
+                            <label for="price">PRICE</label>
+                            <input type="number" class="form-control form-control-rounded" id="price" name="price">
                         </div>
 
 
                         <div class="form-group">
-                            <label for="fileInput">Upload Foto</label>
+                            <label for="image">Upload Foto</label>
 
                             <div class="custom-upload-box">
                                 <span class="choose-btn">Choose File</span>
                                 <span id="file-name">No file chosen</span>
-                                <input type="file" id="fileInput">
+                                <input type="file" id="image" name="image" accept="image/*">
                             </div>
+
+                            <!-- PREVIEW FOTO -->
+                            <img id="preview" src="" alt="Preview Foto"
+                                style="display:none; width:120px; margin-top:10px; border-radius:10px;">
                         </div>
 
 
@@ -35,8 +40,11 @@
                         <div class="form-group">
                             <button type="submit" class="btn btn-light btn-round px-5"><i></i>
                                 Submit</button>
-                            <button type="cancel" class="btn btn-light btn-round px-5"><i></i>
-                                cancel</button>
+                            <button type="button" class="btn btn-light btn-round px-5"
+                                onclick="window.location.href='/product'">
+                                Cancel
+                            </button>
+
                         </div>
                     </form>
                 </div>
@@ -92,4 +100,35 @@
             cursor: pointer;
         }
     </style>
+    <script>
+        document.getElementById("image").addEventListener("change", function(event) {
+            let reader = new FileReader();
+            reader.onload = function() {
+                let preview = document.getElementById("preview");
+                preview.src = reader.result;
+                preview.style.display = "block";
+            }
+            if (event.target.files[0]) {
+                reader.readAsDataURL(event.target.files[0]);
+            }
+        });
+        document.getElementById("image").addEventListener("change", function(event) {
+
+            // 🔹 Nama File
+            let fileName = event.target.files.length ? event.target.files[0].name : "No file chosen";
+            document.getElementById("file-name").textContent = fileName;
+
+            // 🔹 Preview Foto
+            let reader = new FileReader();
+            reader.onload = function() {
+                let preview = document.getElementById("preview");
+                preview.src = reader.result;
+                preview.style.display = "block";
+            }
+
+            if (event.target.files[0]) {
+                reader.readAsDataURL(event.target.files[0]); // tampilkan foto
+            }
+        });
+    </script>
 @endsection
