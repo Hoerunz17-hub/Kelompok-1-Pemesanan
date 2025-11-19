@@ -12,18 +12,18 @@ class CartController extends Controller
         $cart = session()->get('cart', []);
 
         $product_id = $request->product_id;
-        $qty = $request->qty;
+        $qty = $request->qty ?? 1;
 
         if (isset($cart[$product_id])) {
-            // Kalau sudah ada, tambahkan qty
+            // Jika produk sudah ada, qty bertambah otomatis
             $cart[$product_id]['qty'] += $qty;
         } else {
-            // Tambah barang baru
+            // Tambah produk baru
             $cart[$product_id] = [
                 'id' => $product_id,
                 'name' => $request->name,
                 'price' => $request->price,
-                'qty' => $qty
+                'qty' => $qty,
             ];
         }
 
@@ -35,15 +35,27 @@ class CartController extends Controller
         ]);
     }
 
-    public function remove($id)
+    public function remove(Request $request)
     {
         $cart = session()->get('cart', []);
+
+        $id = $request->id;
 
         if (isset($cart[$id])) {
             unset($cart[$id]);
             session()->put('cart', $cart);
         }
 
-        return response()->json(['message' => 'Item dihapus']);
+        return response()->json([
+            'message' => 'Item dihapus',
+            'cart' => $cart
+        ]);
+    }
+
+    public function getCart()
+    {
+        return response()->json([
+            'cart' => session()->get('cart', [])
+        ]);
     }
 }

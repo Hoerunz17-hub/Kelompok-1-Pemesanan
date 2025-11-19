@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\Backend\DashboardBackendController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Backend\UserBackendController;
 use App\Http\Controllers\Backend\LoginBackendController;
 use App\Http\Controllers\Backend\OrderBackendController;
-use App\Http\Controllers\Backend\ProductBackendController;
-use App\Http\Controllers\Backend\UserBackendController;
 use App\Http\Controllers\Frontend\HomeFrontendController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Backend\ProductBackendController;
+use App\Http\Controllers\Backend\DashboardBackendController;
 
 // ========== FRONTEND ==========
 Route::get('/', [HomeFrontendController::class, 'index']);
@@ -33,3 +34,8 @@ Route::post('/product/toggle/{id}', [ProductBackendController::class,'toggle']);
 Route::get('/order', [OrderBackendController::class, 'index'])->name('backend.order.index');
 Route::get('/order/detail/{id}', [OrderBackendController::class, 'detail'])->name('backend.order.detail');
 Route::get('/order/payment/{id}', [OrderBackendController::class, 'payment'])->name('backend.order.payment');
+
+// Cart
+Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
+Route::get('/cart/get', [CartController::class, 'getCart'])->name('cart.get');
