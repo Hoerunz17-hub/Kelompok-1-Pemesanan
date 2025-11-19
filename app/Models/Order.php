@@ -11,6 +11,7 @@ class Order extends Model
 
     protected $fillable = [
         'no_invoice',
+        'name',
         'waiters_id',
         'casier_id',
         'table_no',
