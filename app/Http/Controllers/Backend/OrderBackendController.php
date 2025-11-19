@@ -12,7 +12,10 @@ class OrderBackendController extends Controller
     // 📌 Tampilkan semua data order
     public function index()
     {
-        $orders = Order::with(['waiter', 'casier'])->latest()->paginate(10);
+        $orders = Order::with(['waiter', 'casier'])
+               ->orderBy('id', 'asc')
+               ->paginate(10);
+
         return view('page.backend.order.index', compact('orders'));
     }
 

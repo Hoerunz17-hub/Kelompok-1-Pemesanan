@@ -9,7 +9,22 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Table User</h5>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h3 class="card-title m-0">Table Product</h3>
+
+                        <div class="d-flex align-items-center" style="gap:15px;">
+                            <input type="text" id="searchInput" class="form-control" placeholder="Search..."
+                                style="width:200px; border-radius:8px; font-size:14px;">
+
+                            <select id="filterSelect" class="form-control"
+                                style="width:180px; border-radius:8px; font-size:14px;">
+                                <option value="all">Semua Category</option>
+                                <option value="Makanan Pembuka">Makanan Pembuka</option>
+                                <option value="Menu Utama">Menu Utama</option>
+                                <option value="Makanan Penutup">Makanan Penutup</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-bordered">
                             <thead>
@@ -18,6 +33,7 @@
                                     <th scope="col">IMAGE</th>
                                     <th scope="col">NAME</th>
                                     <th scope="col">PRICE</th>
+                                    <th scope="col">CATEGORY</th>
                                     <th scope="col">STATUS</th>
                                     <th scope="col">ACTION</th>
                                 </tr>
@@ -42,6 +58,15 @@
                                         </td>
                                         <td>{{ $product->name }}</td>
                                         <td>Rp {{ number_format($product->price, 0, ',', '.') }}</td>
+                                        <td>
+                                            @if ($product->category === 'Makanan Pembuka')
+                                                <span class="badge-category badge-pembuka">Makanan Pembuka</span>
+                                            @elseif ($product->category === 'Menu Utama')
+                                                <span class="badge-category badge-menu">Menu Utama</span>
+                                            @elseif ($product->category === 'Makanan Penutup')
+                                                <span class="badge-category badge-penutup">Makanan Penutup</span>
+                                            @endif
+                                        </td>
 
 
                                         <td> <label class="switch">
@@ -50,9 +75,6 @@
                                                 <span class="slider round"></span>
                                             </label></td>
                                         <td>
-                                            <a href="#" class="btn-view">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
 
                                             <a href="/product/edit/{{ $product->id }}" class="btn-edit">
                                                 <i class="fa fa-edit"></i>
@@ -68,6 +90,8 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <div id="paginationContainer"></div>
+
                     </div>
                 </div>
             </div>
@@ -75,6 +99,31 @@
         <div class="overlay toggle-menu"></div>
     </div>
     <style>
+        /* Badge Category */
+        .badge-category {
+            padding: 6px 14px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 13px;
+            color: white;
+            display: inline-block;
+        }
+
+        /* Makanan Pembuka → Biru muda */
+        .badge-pembuka {
+            background-color: #76C7F5;
+        }
+
+        /* Menu Utama → Hijau */
+        .badge-menu {
+            background-color: #4BCB71;
+        }
+
+        /* Makanan Penutup → Pink */
+        .badge-penutup {
+            background-color: #F58AD0;
+        }
+
         .mb-3 {
             width: 100%;
             padding: 20px;
@@ -232,26 +281,98 @@
     {{-- Script --}}
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            document.querySelectorAll(".toggle-status").forEach(toggle => {
-                toggle.addEventListener("change", function() {
-                    let productId = this.dataset.id;
-                    let status = this.checked ? 1 : 0;
 
-                    fetch(`/product/toggle/${productId}`, {
-                            method: "POST",
-                            headers: {
-                                "X-CSRF-TOKEN": "{{ csrf_token() }}",
-                                "Content-Type": "application/json",
-                            },
-                            body: JSON.stringify({
-                                status: status
-                            })
-                        })
-                        .then(res => res.json())
-                        .then(data => console.log("Status updated:", data))
-                        .catch(err => console.error("Error:", err));
-                });
+            const searchInput = document.getElementById("searchInput");
+            const filterSelect = document.getElementById("filterSelect");
+            const rows = Array.from(document.querySelectorAll("table.table tbody tr"));
+
+            const rowsPerPage = 10;
+            let currentPage = 1;
+            let filteredRows = [...rows];
+
+            // Buat pagination HTML
+            const pagination = document.createElement("div");
+            pagination.className = "d-flex justify-content-between align-items-center mt-3";
+
+            pagination.innerHTML = `
+        <small id="tableInfo" class="text-muted"></small>
+        <div>
+            <button id="prevBtn" class="btn btn-outline-secondary btn-sm">Prev</button>
+            <span id="pageIndicator" class="mx-2 fw-bold">1</span>
+            <button id="nextBtn" class="btn btn-outline-secondary btn-sm">Next</button>
+        </div>
+    `;
+
+            document.getElementById("paginationContainer").appendChild(pagination);
+
+            const tableInfo = pagination.querySelector("#tableInfo");
+            const prevBtn = pagination.querySelector("#prevBtn");
+            const nextBtn = pagination.querySelector("#nextBtn");
+            const pageIndicator = pagination.querySelector("#pageIndicator");
+
+            function renderTable() {
+                const total = filteredRows.length;
+                const totalPages = Math.ceil(total / rowsPerPage);
+                currentPage = Math.max(1, Math.min(currentPage, totalPages));
+
+                rows.forEach(r => r.style.display = "none");
+
+                const start = (currentPage - 1) * rowsPerPage;
+                const end = start + rowsPerPage;
+
+                filteredRows.slice(start, end).forEach(r => r.style.display = "");
+
+                tableInfo.textContent = total ?
+                    `Menampilkan ${start + 1} - ${Math.min(end, total)} dari ${total} data` :
+                    "Tidak ada data ditemukan";
+
+                pageIndicator.textContent = `${total ? currentPage : 0}/${total ? totalPages : 0}`;
+
+                prevBtn.disabled = currentPage === 1;
+                nextBtn.disabled = currentPage === totalPages || total === 0;
+            }
+
+            prevBtn.addEventListener("click", () => {
+                currentPage--;
+                renderTable();
             });
+
+            nextBtn.addEventListener("click", () => {
+                currentPage++;
+                renderTable();
+            });
+
+            // === SEARCH ===
+            searchInput.addEventListener("keyup", function() {
+                const keyword = this.value.toLowerCase().trim();
+                applyFilters(keyword, filterSelect.value);
+            });
+
+            // === FILTER CATEGORY ===
+            filterSelect.addEventListener("change", function() {
+                const keyword = searchInput.value.toLowerCase().trim();
+                applyFilters(keyword, this.value);
+            });
+
+            function applyFilters(keyword, categoryFilter) {
+                filteredRows = rows.filter(row => {
+                    let text = row.innerText.toLowerCase();
+
+                    const category = row.querySelector("td:nth-child(5)")?.innerText.trim();
+
+                    const matchesSearch = text.includes(keyword);
+
+                    if (categoryFilter === "all") return matchesSearch;
+                    return category === categoryFilter && matchesSearch;
+                });
+
+                currentPage = 1;
+                renderTable();
+            }
+
+            // Render awal
+            renderTable();
+
         });
     </script>
 @endsection

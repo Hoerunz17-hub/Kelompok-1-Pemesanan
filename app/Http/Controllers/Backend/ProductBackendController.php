@@ -12,7 +12,7 @@ class ProductBackendController extends Controller
     // 📌 Tampilkan semua data
     public function index()
     {
-        $products = Product::latest()->paginate(10);
+        $products = Product::orderBy('id', 'asc')->paginate(10);
         return view('page.backend.product.index', compact('products'));
     }
 
@@ -29,14 +29,14 @@ class ProductBackendController extends Controller
         $request->validate([
             'name'      => 'required|string|max:255',
             'price'     => 'required|integer|min:0',
-
+             'category'  => 'required|in:Makanan Pembuka,Menu Utama,Makanan Penutup',
             'image'     => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
         ]);
 
         $dataproduct_store = [
             'name'      => $request->name,
             'price'     => $request->price,
-
+            'category'  => $request->category,
         ];
 
         if ($request->hasFile('image')) {
@@ -83,7 +83,7 @@ class ProductBackendController extends Controller
         $request->validate([
             'name'      => 'required|string|max:255',
             'price'     => 'required|integer|min:0',
-
+            'category'  => 'required|in:Makanan Pembuka,Menu Utama,Makanan Penutup',
             'image'     => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
         ]);
 
@@ -92,7 +92,7 @@ class ProductBackendController extends Controller
         $dataproduct_update = [
             'name'      => $request->name,
             'price'     => $request->price,
-
+            'category'  => $request->category,
         ];
 
         if ($request->hasFile('image')) {
