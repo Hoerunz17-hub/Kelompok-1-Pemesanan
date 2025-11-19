@@ -22,6 +22,12 @@ class OrderBackendController extends Controller
         $waiters = User::where('role', 'waiter')->get();
         $cashiers = User::where('role', 'kasir')->get();
 
+        // nomor invoic
+        $lastOrder = Order::latest('id')->first();
+        $nextId = $lastOrder ? $lastOrder->id + 1 : 1;
+
+        $no_invoice = 'INV-' . date('Ymd') . '-' . str_pad($nextId, 4, '0', STR_PAD_LEFT);
+
         return view('page.backend.order.create', compact('waiters', 'cashiers'));
     }
 
@@ -30,6 +36,7 @@ class OrderBackendController extends Controller
     {
         $request->validate([
             'no_invoice'   => 'required|unique:orders',
+            'name'         => 'nullable|string',
             'waiters_id'   => 'required|exists:users,id',
             'casier_id'    => 'nullable|exists:users,id',
             'table_no'     => 'nullable|string',
@@ -71,6 +78,7 @@ class OrderBackendController extends Controller
     {
         $request->validate([
             'waiters_id'   => 'required|exists:users,id',
+            'name'         => 'nullable|string',
             'casier_id'    => 'nullable|exists:users,id',
             'table_no'     => 'nullable|string',
             'order_type'   => 'required|in:dine_in,takeaway',
