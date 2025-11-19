@@ -13,7 +13,11 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('name');
             $table->integer('price')->default(0);
-
+            $table->enum('category', [
+    'Makanan Pembuka',
+    'Menu Utama',
+    'Makanan Penutup'
+]);
             $table->enum('is_active', ['active','nonactive'])->default('active');
 
             $table->timestamps();

@@ -9,24 +9,9 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'no_invoice',
-        'name',
-        'waiters_id',
-        'casier_id',
-        'table_no',
-        'order_type',
-        'order_date',
-        'total_cost',
-        'discount',
-        'paid_amount',
-        'change_amount',
-        'payment_method',
-        'is_paid',
-        'status',
-        'paid_date',
-        'note',
-    ];
+    protected $table = 'orders';
+
+    protected $guarded = [];
 
     // RELATION KE USER
     public function waiter()

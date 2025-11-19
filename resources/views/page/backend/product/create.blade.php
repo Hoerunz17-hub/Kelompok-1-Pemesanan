@@ -19,6 +19,16 @@
                             <label for="price">PRICE</label>
                             <input type="number" class="form-control form-control-rounded" id="price" name="price">
                         </div>
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            <select class="form-control form-control-rounded" id="category" name="category">
+                                <option value="">-- Pilih Category --</option>
+                                <option value="Makanan Pembuka">Makanan Pembuka</option>
+                                <option value="Menu Utama">Menu Utama</option>
+                                <option value="Makanan Penutup">Makanan Penutup</option>
+                            </select>
+                        </div>
+
 
 
                         <div class="form-group">
@@ -54,6 +64,22 @@
         <div class="overlay toggle-menu"></div>
     </div>
     <style>
+        /* Supaya nama file tidak mendorong tombol */
+        #file-name {
+            color: white;
+            opacity: 0.8;
+            font-size: 15px;
+
+            max-width: 250px;
+            /* batas lebar text */
+            white-space: nowrap;
+            /* jangan turun baris */
+            overflow: hidden;
+            /* sembunyikan overflow */
+            text-overflow: ellipsis;
+            /* tambah … */
+        }
+
         .custom-upload-box {
             width: 100%;
             height: 50px;

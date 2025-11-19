@@ -53,6 +53,21 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="category">Category</label>
+                            <select class="form-control form-control-rounded" id="category" name="category">
+                                <option value="">-- Pilih Category --</option>
+                                <option
+                                    value="Makanan Pembuka"{{ $product->category == 'Makanan Pembuka' ? 'selected' : '' }}>
+                                    Makanan Pembuka</option>
+                                <option value="Menu Utama"{{ $product->category == 'Menu Utama' ? 'selected' : '' }}>Menu
+                                    Utama</option>
+                                <option
+                                    value="Makanan Penutup"{{ $product->category == 'Makanan Penutup' ? 'selected' : '' }}>
+                                    Makanan Penutup</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
                             <button type="submit" class="btn btn-light btn-round px-5"><i></i>
                                 Submit</button>
                             <button type="button" class="btn btn-light btn-round px-5"

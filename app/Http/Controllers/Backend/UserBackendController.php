@@ -13,7 +13,7 @@ class UserBackendController extends Controller
     // 📌 Tampilkan semua user
     public function index()
     {
-        $users = User::latest()->paginate(10);
+       $users = User::orderBy('id', 'asc')->paginate(10);
         return view('page.backend.user.index', compact('users'));
     }
 

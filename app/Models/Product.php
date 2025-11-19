@@ -8,13 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
-
-    protected $fillable = [
-        'image',
-        'name',
-        'price',
-        'is_active'
-    ];
+    //nama table
+    protected $table = 'products';
+    //fillable
+    protected $guarded = [];
 
     public function orderDetails()
     {
