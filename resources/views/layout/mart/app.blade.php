@@ -50,6 +50,68 @@
     </script>
     <script src="{{ asset('assetsfrontend/js/plugins.js') }}"></script>
     <script src="{{ asset('assetsfrontend/js/script.js') }}"></script>
+    <script>
+        function updateCartList(cart) {
+            let html = '';
+
+            let total = 0;
+
+            Object.values(cart).forEach(item => {
+                total += item.price * item.qty;
+
+                html += `
+                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <div>
+                            <h6 class="my-0">${item.name}</h6>
+                            <small class="text-body-secondary">Qty: ${item.qty}</small>
+                        </div>
+                        <span class="text-body-secondary">$${item.price * item.qty}</span>
+                    </li>
+                `;
+            });
+
+            html += `
+                <li class="list-group-item d-flex justify-content-between">
+                    <span>Total</span>
+                    <strong>$${total}</strong>
+                </li>
+            `;
+
+            document.getElementById('cart-list').innerHTML = html;
+        }
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+
+            document.addEventListener("click", function(e) {
+                let btn = e.target.closest(".add-to-cart");
+                if (!btn) return;
+
+                e.preventDefault();
+
+                let productId = btn.dataset.id;
+                let qty = 1; // default 1 untuk navbar / card kecil
+
+                fetch('/cart/add', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                    },
+                    body: JSON.stringify({
+                        product_id: productId,
+                        qty: qty
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    updateCartList(data.cart);
+                });
+            });
+
+        });
+    </script>
+
 </body>
 
 </html>
