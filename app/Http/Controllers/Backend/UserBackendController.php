@@ -3,125 +3,133 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 
 class UserBackendController extends Controller
 {
-    // 📌 Tampilkan semua user
+    // INDEX
     public function index()
     {
         $users = User::latest()->paginate(10);
         return view('page.backend.user.index', compact('users'));
     }
 
-    // 📌 Form tambah user
+    // CREATE
     public function create()
     {
         return view('page.backend.user.create');
     }
 
-    // 📌 Simpan user baru
+    // STORE
     public function store(Request $request)
     {
         $request->validate([
-            'image'        => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'name'         => 'required|string|max:255',
-            'address'      => 'nullable|string|max:255',
-            'phonenumber'  => 'nullable|string|max:20',
-            'email'        => 'required|email|unique:users,email',
-            'password'     => 'required|string|min:6',
-            'role'         => 'required|in:waiter,kasir,admin,super admin',
-            'is_active'    => 'required|in:active,nonactive',
+            'name'        => 'required|string|max:255',
+            'address'     => 'nullable|string',
+            'phonenumber' => 'nullable|string',
+            'email'       => 'required|email|unique:users,email',
+            'password'    => 'required|string|min:6',
+            'role'        => 'required|string',
+            'is_active'   => 'required|string',
+            'image'       => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
         ]);
 
-        $imagePath = null;
-
+        // Upload foto
+        $image = null;
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('users', 'public');
+            $image = $request->file('image')->store('user', 'public');
         }
 
         User::create([
-            'image'       => $imagePath,
             'name'        => $request->name,
             'address'     => $request->address,
             'phonenumber' => $request->phonenumber,
             'email'       => $request->email,
-            'password'    => Hash::make($request->password),
+            'password'    => bcrypt($request->password),
             'role'        => $request->role,
             'is_active'   => $request->is_active,
+            'image'       => $image
         ]);
 
-        return redirect()->route('backend.user.index')->with('success', 'User berhasil ditambahkan');
+        return redirect()->route('backend.user.index')->with('success', 'User berhasil ditambahkan!');
     }
 
-    // 📌 Form edit user
+    // SHOW (DETAIL USER)
+    public function show($id)
+    {
+        $user = User::findOrFail($id);
+        return view('page.backend.user.detail', compact('user'));
+    }
+
+    // EDIT
     public function edit($id)
     {
         $user = User::findOrFail($id);
         return view('page.backend.user.edit', compact('user'));
     }
 
-    // 📌 Update user
+    // UPDATE
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
 
         $request->validate([
-            'image'        => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'name'         => 'required|string|max:255',
-            'address'      => 'nullable|string|max:255',
-            'phonenumber'  => 'nullable|string|max:20',
-            'email'        => 'required|email|unique:users,email,' . $user->id,
-            'password'     => 'nullable|string|min:6',
-            'role'         => 'required|in:waiter,kasir,admin,super admin',
-            'is_active'    => 'required|in:active,nonactive',
+            'name'        => 'required|string|max:255',
+            'address'     => 'nullable|string',
+            'phonenumber' => 'nullable|string',
+            'email'       => 'required|email|unique:users,email,' . $id,
+            'role'        => 'required|string',
+            'is_active'   => 'required|string',
+            'image'       => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
         ]);
 
-        $imagePath = $user->image;
-
-        if ($request->hasFile('image')) {
-
-            if ($user->image && Storage::disk('public')->exists($user->image)) {
-                Storage::disk('public')->delete($user->image);
-            }
-
-            $imagePath = $request->file('image')->store('users', 'public');
-        }
-
-        // update password hanya jika diisi
-        $password = $user->password;
-        if ($request->filled('password')) {
-            $password = Hash::make($request->password);
-        }
-
+        // Update data dasar
         $user->update([
-            'image'       => $imagePath,
             'name'        => $request->name,
             'address'     => $request->address,
             'phonenumber' => $request->phonenumber,
             'email'       => $request->email,
-            'password'    => $password,
             'role'        => $request->role,
             'is_active'   => $request->is_active,
         ]);
 
-        return redirect()->route('backend.user.index')->with('success', 'User berhasil diperbarui');
+        // Update password (jika diisi)
+        if ($request->filled('password')) {
+            $user->update([
+                'password' => bcrypt($request->password)
+            ]);
+        }
+
+        // Update foto (jika ada upload baru)
+        if ($request->hasFile('image')) {
+
+            // Hapus foto lama
+            if ($user->image) {
+                Storage::disk('public')->delete($user->image);
+            }
+
+            // Upload foto baru
+            $image = $request->file('image')->store('user', 'public');
+            $user->update(['image' => $image]);
+        }
+
+        return redirect()->route('backend.user.index')->with('success', 'User berhasil diupdate!');
     }
 
-    // 📌 Hapus user
+    // DELETE
     public function destroy($id)
     {
         $user = User::findOrFail($id);
 
-        if ($user->image && Storage::disk('public')->exists($user->image)) {
+        // Hapus foto
+        if ($user->image) {
             Storage::disk('public')->delete($user->image);
         }
 
         $user->delete();
 
-        return redirect()->route('backend.user.index')->with('success', 'User berhasil dihapus');
+        return redirect()->route('backend.user.index')->with('success', 'User berhasil dihapus!');
     }
 }
