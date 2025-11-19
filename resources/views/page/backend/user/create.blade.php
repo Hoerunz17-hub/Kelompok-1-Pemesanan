@@ -8,85 +8,131 @@
                 <div class="card-body">
                     <div class="card-title">Create User</div>
                     <hr>
-                    <form>
-                        <div class="form-group">
-                            <label for="input-6">Name</label>
-                            <input type="text" class="form-control form-control-rounded" id="input-6"
-                                placeholder="Enter Your Name">
-                        </div>
-                        <div class="form-group">
-                            <label for="input-7">Alamat</label>
-                            <input type="text" class="form-control form-control-rounded" id="input-7"
-                                placeholder="Enter Your Email Address">
-                        </div>
-                        <div class="form-group">
-                            <label for="input-8">No Handphone</label>
-                            <input type="text" class="form-control form-control-rounded" id="input-8"
-                                placeholder="Enter Your Mobile Number">
-                        </div>
-                        <div class="form-group">
-                            <label for="input-9">Email</label>
-                            <input type="text" class="form-control form-control-rounded" id="input-9"
-                                placeholder="Enter Password">
-                        </div>
-                        <div class="form-group">
-                            <label for="input-10">Password</label>
-                            <input type="text" class="form-control form-control-rounded" id="input-10"
-                                placeholder="Confirm Password">
-                        </div>
 
+                    {{-- FORM MULAI --}}
+                    <form action="{{ route('backend.user.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                    
                         <div class="form-group">
-                            <label for="input-10">Role</label>
-                            <input type="text" class="form-control form-control-rounded" id="input-10"
-                                placeholder="Confirm Password">
+                            <label for="name">Name</label>
+                            <input name="name" type="text" 
+                                   class="form-control form-control-rounded"
+                                   value="{{ old('name') }}"
+                                   placeholder="Enter Your Name" required>
+                            @error('name') 
+                                <small class="text-danger">{{ $message }}</small> 
+                            @enderror
                         </div>
-
+                    
+                        <div class="form-group">
+                            <label for="address">Alamat</label>
+                            <input name="address" type="text" 
+                                   class="form-control form-control-rounded"
+                                   value="{{ old('address') }}"
+                                   placeholder="Enter Your Address">
+                            @error('address') 
+                                <small class="text-danger">{{ $message }}</small> 
+                            @enderror
+                        </div>
+                    
+                        <div class="form-group">
+                            <label for="phonenumber">No Handphone</label>
+                            <input name="phonenumber" type="text" 
+                                   class="form-control form-control-rounded"
+                                   value="{{ old('phonenumber') }}"
+                                   placeholder="Enter Your Mobile Number">
+                            @error('phonenumber') 
+                                <small class="text-danger">{{ $message }}</small> 
+                            @enderror
+                        </div>
+                    
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input name="email" type="email" 
+                                   class="form-control form-control-rounded"
+                                   value="{{ old('email') }}"
+                                   placeholder="Enter Email" required>
+                            @error('email') 
+                                <small class="text-danger">{{ $message }}</small> 
+                            @enderror
+                        </div>
+                    
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input name="password" type="password" 
+                                   class="form-control form-control-rounded"
+                                   placeholder="Enter Password" required>
+                            @error('password') 
+                                <small class="text-danger">{{ $message }}</small> 
+                            @enderror
+                        </div>
+                    
+                        <div class="form-group">
+                            <label for="role">Role</label>
+                            <select name="role" class="form-control form-control-rounded" required>
+                                <option value="waiter" {{ old('role')=='waiter' ? 'selected' : '' }}>Waiter</option>
+                                <option value="kasir" {{ old('role')=='kasir' ? 'selected' : '' }}>Kasir</option>
+                                <option value="admin" {{ old('role')=='admin' ? 'selected' : '' }}>Admin</option>
+                                <option value="super admin" {{ old('role')=='super admin' ? 'selected' : '' }}>Super Admin</option>
+                            </select>
+                            @error('role') 
+                                <small class="text-danger">{{ $message }}</small> 
+                            @enderror
+                        </div>
+                    
+                        <div class="form-group">
+                            <label for="is_active">Status</label>
+                            <select name="is_active" class="form-control form-control-rounded" required>
+                                <option value="active" {{ old('is_active')=='active' ? 'selected' : '' }}>Active</option>
+                                <option value="nonactive" {{ old('is_active')=='nonactive' ? 'selected' : '' }}>Non Active</option>
+                            </select>
+                            @error('is_active') 
+                                <small class="text-danger">{{ $message }}</small> 
+                            @enderror
+                        </div>
+                    
                         <div class="form-group">
                             <label for="fileInput">Upload Foto</label>
-
-                            <div class="custom-upload-box">
+                            <div class="custom-upload-box" onclick="document.getElementById('fileInput').click()">
                                 <span class="choose-btn">Choose File</span>
                                 <span id="file-name">No file chosen</span>
-                                <input type="file" id="fileInput">
+                                <input type="file" name="image" id="fileInput" accept="image/*">
                             </div>
+                            @error('image') 
+                                <small class="text-danger">{{ $message }}</small> 
+                            @enderror
                         </div>
-
-
-
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-light btn-round px-5"><i></i>
-                                Submit</button>
-                            <button type="cancel" class="btn btn-light btn-round px-5"><i></i>
-                                cancel</button>
+                    
+                        <div class="form-group mt-3">
+                            <button type="submit" class="btn btn-light btn-round px-5">save</button>
+                            <a href="{{ route('backend.user.index') }}" class="btn btn-light btn-round px-5">Cancel</a>
                         </div>
                     </form>
+                    {{-- FORM SELESAI --}}
+
                 </div>
             </div>
         </div>
 
         <div class="overlay toggle-menu"></div>
     </div>
+
+    {{-- STYLE TETAP --}}
     <style>
         .custom-upload-box {
             width: 100%;
             height: 50px;
             border-radius: 40px;
-
-            /* WARNA SAMA seperti input lain */
             background: rgba(255, 255, 255, 0.25);
-
             display: flex;
             align-items: center;
             padding: 0 10px;
             gap: 15px;
             position: relative;
             cursor: pointer;
-
-            /* efek transparan lembut */
             backdrop-filter: blur(3px);
         }
 
-        /* tombol putih "Choose File" tetap seperti gambar */
         .choose-btn {
             background: white;
             color: #333;
@@ -96,7 +142,6 @@
             font-size: 14px;
         }
 
-        /* teks nama file mengikuti gaya input lain */
         #file-name {
             color: white;
             opacity: 0.8;
@@ -113,4 +158,11 @@
             cursor: pointer;
         }
     </style>
+
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function() {
+            const fileName = this.files.length ? this.files[0].name : "No file chosen";
+            document.getElementById('file-name').textContent = fileName;
+        });
+    </script>
 @endsection

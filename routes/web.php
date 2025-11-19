@@ -18,9 +18,7 @@ Route::get('/login', [LoginBackendController::class, 'login'])->name('login');
 Route::get('/adminpanel', [DashboardBackendController::class, 'index'])->name('backend.dashboard');
 
 // ========== USER CRUD ==========
-Route::resource('/user', UserBackendController::class, [
-    'as' => 'backend'  // route name: backend.user.index, backend.user.create, dll
-]);
+Route::resource('/user', UserBackendController::class, ['as' => 'backend']);
 
 // ========== PRODUCT CRUD ==========
 Route::get('/product', [ProductBackendController::class,'index']);
