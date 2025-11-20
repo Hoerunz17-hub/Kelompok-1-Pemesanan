@@ -4,7 +4,7 @@
   </div>
 
   <div class="offcanvas-body">
-    <form action="{{ route('order.store') }}" method="POST">
+    <form action="" method="POST">
       <div class="order-md-last">
 
         <h4 class="d-flex justify-content-between align-items-center mb-3">
@@ -42,10 +42,17 @@
             <input type="text" class="form-control" name="customer_name">
           </div>
 
-          <div class="flex-fill">
-            <label class="form-label">No Invoice</label>
-            <input type="text" class="form-control" name="invoice_number" value="{{ $no_invoice }}">
-          </div>
+            @php
+                $last = \App\Models\Order::latest('id')->first();
+                $nextId = $last ? $last->id + 1 : 1;
+
+                $no_invoice = 'INV-' . date('Ymd') . '-' . str_pad($nextId, 4, '0', STR_PAD_LEFT);
+            @endphp
+
+            <div class="flex-fill">
+                <label class="form-label">No Invoice</label>
+                <input type="text" class="form-control" name="invoice_number" value="{{ $no_invoice }}" readonly>
+            </div>
         </div>
 
         <div class="d-flex gap-2 mb-3">
@@ -55,8 +62,7 @@
           </select>
 
           <select class="form-select transparent-arrow" name="cashier" style="background-color:#ffe19f;">
-            <option>Yanto</option>
-            <option>Yanti</option>
+              <option>Yudi</option>
           </select>
         </div>
 

@@ -35,8 +35,6 @@
         </div>
     </div>
 
-    @include('layout.mart.canvascart')
-
     @include('layout.mart.navbar')
 
     @yield('content')
