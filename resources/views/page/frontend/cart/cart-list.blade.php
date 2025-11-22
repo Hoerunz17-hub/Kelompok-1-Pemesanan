@@ -5,12 +5,14 @@
             <small class="text-body-secondary">Qty: {{ $item['qty'] }}</small>
         </div>
         <span class="text-body-secondary">
-            ${{ $item['price'] * $item['qty'] }}
+            ${{ number_format($item['price'] * $item['qty'], 0, ',', '.') }}
         </span>
     </li>
 @endforeach
 
 <li class="list-group-item d-flex justify-content-between">
     <span>Total</span>
-    <strong>${{ collect($cart)->sum(fn($i) => $i['price'] * $i['qty']) }}</strong>
+    <strong id="cart-total">
+        {{ number_format(array_sum(array_map(fn($x) => $x['qty'] * $x['price'], $cart)), 0, ',', '.') }}
+    </strong>
 </li>
