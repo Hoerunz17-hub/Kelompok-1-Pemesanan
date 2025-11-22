@@ -20,14 +20,15 @@
             <button type="button" class="btn-close" aria-label="Close"></button>
         </div>
 
-        <form action="" method="POST">
+        <form action="/order" method="POST">
+            @csrf
             <div class="order-md-last">
 
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
                     <span class="text-primary">Order</span>
 
                     <span class="badge bg-primary rounded-pill">
-                        <select class="transparent-arrows" name="order_number">
+                        <select class="transparent-arrows" name="table_no">
                             <option>001</option>
                             <option>002</option>
                             <option>003</option>

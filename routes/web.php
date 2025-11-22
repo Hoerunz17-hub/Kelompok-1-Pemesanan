@@ -32,10 +32,7 @@ Route::post('/product/update/{id}', [ProductBackendController::class,'update']);
 Route::post('/product/toggle/{id}', [ProductBackendController::class,'toggle']);
 
 // ========== ORDER (Custom karena berbeda struktur) ==========
-Route::get('/order', [OrderBackendController::class, 'index'])->name('backend.order.index');
-Route::post('/order/store', [OrderBackendController::class, 'index'])->name('order.store');
-Route::get('/order/detail/{id}', [OrderBackendController::class, 'detail'])->name('backend.order.detail');
-Route::get('/order/payment/{id}', [OrderBackendController::class, 'payment'])->name('backend.order.payment');
+
 
 // CART
 Route::get('/cart', [CartController::class, 'index'])->name('page.frontend.cart.index');
@@ -44,7 +41,9 @@ Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('car
 Route::post('/cart/submit', [CartController::class, 'submitOrder'])->name('cart.submit');
 
 // Order (pakai resource)
-Route::resource('orders', OrderBackendController::class);
+Route::resource('order', OrderBackendController::class);
+Route::get('/order/detail/{id}', [OrderBackendController::class, 'detail'])->name('backend.order.detail');
+Route::get('/order/payment/{id}', [OrderBackendController::class, 'payment'])->name('backend.order.payment');
 
 // Order Detail (nested routes)
 Route::prefix('orders/{order}')->group(function () {

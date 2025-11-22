@@ -45,11 +45,11 @@
                                     </td>
 
                                     <td>
-                                        <a href="/order/detail" class="btn-view">
+                                        <a href="/order/detail/{{ $order->id }}" class="btn-view">
                                             <i class="fa fa-eye"></i>
                                         </a>
 
-                                        <a href="/order/payment" class="btn-edit">
+                                        <a href="/order/payment/{{ $order->id }}" class="btn-edit">
                                             <i class="fa fa-edit"></i>
                                         </a>
 
