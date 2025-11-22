@@ -13,25 +13,29 @@ use Illuminate\View\View;
 class CartController extends Controller
 {
     public function index(){
-        return View('page.frontend.cart.index');
-    }
-
-    // TAMPILKAN CART (canvas)
-    public function show()
-    {
-        $cart = session('cart', []);
-
-        // No Invoice generator
+        // Generate invoice
         $lastOrder = Order::latest('id')->first();
         $nextId = $lastOrder ? $lastOrder->id + 1 : 1;
 
         $no_invoice = 'INV-' . date('Ymd') . '-' . str_pad($nextId, 4, '0', STR_PAD_LEFT);
 
-        // Ambil waiter
+        // Ambil data waiter
         $waiters = User::where('role', 'waiter')->get();
 
-        return view('layout.mart.canvascart', compact('cart', 'no_invoice', 'waiters'));
+        // Ambil cart
+        $cart = session('cart', []);
+
+        return view('page.frontend.cart.index', compact('no_invoice', 'waiters', 'cart'));
     }
+
+
+    public function getCart()
+    {
+        $cart = session('cart', []);
+
+        return view('page.frontend.cart.index', compact('cart'));
+    }
+
 
     // TAMBAH ITEM KE CART
     public function add(Request $request)

@@ -10,10 +10,11 @@ class HomeFrontendController extends Controller
 {
     public function index(){
 
-        // Ambil hanya hero dengan status aktif
-        $activeProduct = Product::where('is_active', 'active')->get();
+        $menuPembuka = Product::where('category', 'Makanan Pembuka')->get();
+        $menuUtama = Product::where('category', 'Menu Utama')->get();
+        $menuPenutup = Product::where('category', 'Makanan Penutup')->get();
 
-        // Kirim data ke view landing page
-        return view('page.frontend.landing.index', compact('activeProduct'));
+        return view('page.frontend.landing.index', compact('menuPembuka', 'menuUtama', 'menuPenutup'));
+
     }
 }

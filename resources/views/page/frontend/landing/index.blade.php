@@ -141,7 +141,7 @@
                                     class="product-grid row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
 
                                     <div class="col">
-                                         @foreach ($activeProduct as $produk)
+                                         @foreach ($menuPembuka as $produk)
                                         <div class="product-item">
                                             <span class="badge bg-success position-absolute m-3">-30%</span>
                                             <a href="#" class="btn-wishlist"><svg width="24" height="24">
@@ -252,7 +252,7 @@
         </div>
     </section>
 
-    <!---Menu Pembuka--->
+    <!---Menu Utama--->
     <section class="py-5">
         <div class="container-fluid">
 
@@ -281,7 +281,7 @@
                                     class="product-grid row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
 
                                     <div class="col">
-                                         @foreach ($activeProduct as $produk)
+                                         @foreach ($menuUtama as $produk)
                                         <div class="product-item">
                                             <span class="badge bg-success position-absolute m-3">-30%</span>
                                             <a href="#" class="btn-wishlist"><svg width="24" height="24">
@@ -392,7 +392,7 @@
         </div>
     </section>
 
-    <!---Menu Pembuka--->
+    <!---Menu Penutup--->
     <section class="py-5">
         <div class="container-fluid">
 
@@ -421,7 +421,7 @@
                                     class="product-grid row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
 
                                     <div class="col">
-                                         @foreach ($activeProduct as $produk)
+                                         @foreach ($menuPenutup as $produk)
                                         <div class="product-item">
                                             <span class="badge bg-success position-absolute m-3">-30%</span>
                                             <a href="#" class="btn-wishlist"><svg width="24" height="24">

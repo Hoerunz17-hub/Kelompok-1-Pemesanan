@@ -29,7 +29,7 @@ class ProductBackendController extends Controller
         $request->validate([
             'name'      => 'required|string|max:255',
             'price'     => 'required|integer|min:0',
-             'category'  => 'required|in:Makanan Pembuka,Menu Utama,Makanan Penutup',
+            'category'  => 'required|in:Makanan Pembuka,Menu Utama,Makanan Penutup',
             'image'     => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
         ]);
 
