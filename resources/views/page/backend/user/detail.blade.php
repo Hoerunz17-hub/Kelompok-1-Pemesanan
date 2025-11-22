@@ -64,8 +64,8 @@
 
                 {{-- BUTTON --}}
                 <div class="text-center mt-4">
-                    <a href="{{ route('backend.user.index') }}" class="btn btn-light btn-round px-5">Back</a>
-                    <a href="{{ route('backend.user.edit', $user->id) }}" class="btn btn-primary btn-round px-5">Edit</a>
+                    <a href="{{ route('user.index') }}" class="btn btn-light btn-round px-5">Back</a>
+                    <a href="{{ route('user.edit', $user->id) }}" class="btn btn-primary btn-round px-5">Edit</a>
                 </div>
 
             </div>

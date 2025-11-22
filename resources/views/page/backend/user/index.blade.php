@@ -4,7 +4,7 @@
 
     <div class="container-fluid">
         <div class="mb-3">
-            <a href="{{ route('backend.user.create') }}" class="btn-create">ADD</a>
+            <a href="{{ route('user.create') }}" class="btn-create">ADD</a>
         </div>
         <div class="col-lg-12">
             <div class="card">
@@ -53,27 +53,32 @@
 
                                         {{-- STATUS --}}
                                         <td>
-                                            <label class="switch">
-                                                <input type="checkbox" disabled
-                                                    {{ $user->is_active == 'active' ? 'checked' : '' }}>
-                                                <span class="slider round"></span>
-                                            </label>
+                                            <form action="{{ route('user.toggle', $user->id) }}" method="POST" class="toggle-form">
+                                                @csrf
+
+                                                <label class="switch">
+                                                    <input type="checkbox" 
+                                                           onchange="this.form.submit()" 
+                                                           {{ $user->is_active == 'active' ? 'checked' : '' }}>
+                                                    <span class="slider round"></span>
+                                                </label>
+                                            </form>
                                         </td>
 
                                         {{-- ACTION --}}
                                         <td>
                                             {{-- VIEW --}}
-                                            <a href="{{ route('backend.user.show', $user->id) }}" class="btn-view">
+                                            <a href="{{ route('user.show', $user->id) }}" class="btn-view">
                                                 <i class="fa fa-eye"></i>
                                             </a>
 
                                             {{-- EDIT --}}
-                                            <a href="{{ route('backend.user.edit', $user->id) }}" class="btn-edit">
+                                            <a href="{{ route('user.edit', $user->id) }}" class="btn-edit">
                                                 <i class="fa fa-edit"></i>
                                             </a>
 
                                             {{-- DELETE --}}
-                                            <form action="{{ route('backend.user.destroy', $user->id) }}"
+                                            <form action="{{ route('user.destroy', $user->id) }}"
                                                 method="POST" style="display:inline-block;">
                                                 @csrf
                                                 @method('DELETE')
@@ -133,7 +138,6 @@
         }
         .btn-create:hover { opacity: 0.92; transform: translateY(-2px); }
 
-        /* SWITCH */
         .switch { position: relative; width: 60px; height: 34px; }
         .switch input { display: none; }
         .slider {
@@ -147,19 +151,13 @@
         input:checked + .slider { background-color: #53DFD3; }
         input:checked + .slider:before { transform: translateX(26px); }
 
-        /* BUTTON ACTION */
         .btn-view, .btn-edit, .btn-delete {
             display: inline-flex; justify-content: center; align-items: center;
             width: 45px; height: 28px; border-radius: 40px; color: white;
             font-size: 17px; text-decoration: none; transition: 0.2s; margin-right: 5px;
         }
         .btn-view { background: linear-gradient(to right, #1e3c72, #2a5298); }
-        .btn-view:hover { background: linear-gradient(to right, #182f5c, #24467f); }
-
         .btn-edit { background: linear-gradient(to right, #4a4a4a, #3b3b3b); }
-        .btn-edit:hover { background: linear-gradient(to right, #3a3a3a, #2f2f2f); }
-
         .btn-delete { background: linear-gradient(to right, #8d2245, #a02a58); }
-        .btn-delete:hover { background: linear-gradient(to right, #7c1c3c, #8d2245); }
     </style>
 @endsection

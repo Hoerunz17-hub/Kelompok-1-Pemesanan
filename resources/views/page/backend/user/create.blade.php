@@ -9,8 +9,19 @@
                     <div class="card-title">Create User</div>
                     <hr>
 
+                    {{-- TAMPILKAN ERROR VALIDASI --}}
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul class="mb-0">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     {{-- FORM MULAI --}}
-                    <form action="{{ route('backend.user.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                     
                         <div class="form-group">
@@ -19,9 +30,6 @@
                                    class="form-control form-control-rounded"
                                    value="{{ old('name') }}"
                                    placeholder="Enter Your Name" required>
-                            @error('name') 
-                                <small class="text-danger">{{ $message }}</small> 
-                            @enderror
                         </div>
                     
                         <div class="form-group">
@@ -30,9 +38,6 @@
                                    class="form-control form-control-rounded"
                                    value="{{ old('address') }}"
                                    placeholder="Enter Your Address">
-                            @error('address') 
-                                <small class="text-danger">{{ $message }}</small> 
-                            @enderror
                         </div>
                     
                         <div class="form-group">
@@ -41,9 +46,6 @@
                                    class="form-control form-control-rounded"
                                    value="{{ old('phonenumber') }}"
                                    placeholder="Enter Your Mobile Number">
-                            @error('phonenumber') 
-                                <small class="text-danger">{{ $message }}</small> 
-                            @enderror
                         </div>
                     
                         <div class="form-group">
@@ -52,9 +54,6 @@
                                    class="form-control form-control-rounded"
                                    value="{{ old('email') }}"
                                    placeholder="Enter Email" required>
-                            @error('email') 
-                                <small class="text-danger">{{ $message }}</small> 
-                            @enderror
                         </div>
                     
                         <div class="form-group">
@@ -62,33 +61,27 @@
                             <input name="password" type="password" 
                                    class="form-control form-control-rounded"
                                    placeholder="Enter Password" required>
-                            @error('password') 
-                                <small class="text-danger">{{ $message }}</small> 
-                            @enderror
                         </div>
-                    
+
+                        {{-- ROLE --}}
                         <div class="form-group">
                             <label for="role">Role</label>
                             <select name="role" class="form-control form-control-rounded" required>
-                                <option value="waiter" {{ old('role')=='waiter' ? 'selected' : '' }}>Waiter</option>
-                                <option value="kasir" {{ old('role')=='kasir' ? 'selected' : '' }}>Kasir</option>
+                                <option value="">-- Choose Role --</option>
+                                <option value="waiters" {{ old('role')=='waiters' ? 'selected' : '' }}>Waiter</option>
                                 <option value="admin" {{ old('role')=='admin' ? 'selected' : '' }}>Admin</option>
-                                <option value="super admin" {{ old('role')=='super admin' ? 'selected' : '' }}>Super Admin</option>
+                                <option value="super_admin" {{ old('role')=='super_admin' ? 'selected' : '' }}>Super Admin</option>
                             </select>
-                            @error('role') 
-                                <small class="text-danger">{{ $message }}</small> 
-                            @enderror
                         </div>
-                    
+
+                        {{-- STATUS --}}
                         <div class="form-group">
                             <label for="is_active">Status</label>
                             <select name="is_active" class="form-control form-control-rounded" required>
+                                <option value="">-- Choose Status --</option>
                                 <option value="active" {{ old('is_active')=='active' ? 'selected' : '' }}>Active</option>
                                 <option value="nonactive" {{ old('is_active')=='nonactive' ? 'selected' : '' }}>Non Active</option>
                             </select>
-                            @error('is_active') 
-                                <small class="text-danger">{{ $message }}</small> 
-                            @enderror
                         </div>
                     
                         <div class="form-group">
@@ -98,14 +91,11 @@
                                 <span id="file-name">No file chosen</span>
                                 <input type="file" name="image" id="fileInput" accept="image/*">
                             </div>
-                            @error('image') 
-                                <small class="text-danger">{{ $message }}</small> 
-                            @enderror
                         </div>
                     
                         <div class="form-group mt-3">
-                            <button type="submit" class="btn btn-light btn-round px-5">save</button>
-                            <a href="{{ route('backend.user.index') }}" class="btn btn-light btn-round px-5">Cancel</a>
+                            <button type="submit" class="btn btn-light btn-round px-5">Save</button>
+                            <a href="{{ route('user.index') }}" class="btn btn-light btn-round px-5">Cancel</a>
                         </div>
                     </form>
                     {{-- FORM SELESAI --}}
@@ -117,7 +107,7 @@
         <div class="overlay toggle-menu"></div>
     </div>
 
-    {{-- STYLE TETAP --}}
+    {{-- STYLE --}}
     <style>
         .custom-upload-box {
             width: 100%;

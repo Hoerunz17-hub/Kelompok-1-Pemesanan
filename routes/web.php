@@ -95,6 +95,63 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout')->middl
 */
 Route::middleware(['auth', 'role:admin,super_admin'])->group(function () {
 
+    // DASHBOARD
+    Route::get('/adminpanel', [DashboardBackendController::class, 'index'])->name('adminpanel');
+    Route::get('/dashboard', [DashboardBackendController::class, 'index'])->name('dashboard');
+
+    /*
+    |--------------------------------------------------------------------------
+    | USER (sesuai sidebar: /user)
+    |--------------------------------------------------------------------------
+    */
+    Route::resource('/user', UserBackendController::class);
+
+    // 👉 **Tambah toggle user**
+    Route::post('/user/toggle/{id}', [UserBackendController::class, 'toggle'])
+        ->name('user.toggle');
+
+    /*
+    |--------------------------------------------------------------------------
+    | PRODUCT (sesuai sidebar: /product)
+    |--------------------------------------------------------------------------
+    */
+    Route::get('/product', [ProductBackendController::class, 'index'])->name('product.index');
+    Route::get('/product/create', [ProductBackendController::class, 'create'])->name('product.create');
+    Route::post('/product/store', [ProductBackendController::class, 'store'])->name('product.store');
+    Route::get('/product/edit/{id}', [ProductBackendController::class, 'edit'])->name('product.edit');
+    Route::post('/product/update/{id}', [ProductBackendController::class, 'update'])->name('product.update');
+    Route::get('/product/delete/{id}', [ProductBackendController::class, 'destroy'])->name('product.delete');
+    Route::post('/product/toggle/{id}', [ProductBackendController::class, 'toggle'])->name('product.toggle');
+
+    /*
+    |--------------------------------------------------------------------------
+    | ORDER (sesuai sidebar: /order)
+    |--------------------------------------------------------------------------
+    */
+    Route::get('/order', [OrderBackendController::class, 'index'])->name('order.index');
+    Route::post('/order/store', [OrderBackendController::class, 'store'])->name('order.store');
+    Route::get('/order/detail/{id}', [OrderBackendController::class, 'detail'])->name('order.detail');
+    Route::get('/order/payment/{id}', [OrderBackendController::class, 'payment'])->name('order.payment');
+
+    /*
+    |--------------------------------------------------------------------------
+    | ORDER DETAIL (Nested)
+    |--------------------------------------------------------------------------
+    */
+    Route::prefix('/order/{order}')->group(function () {
+
+        Route::get('/details', [OrderDetailBackendController::class, 'index'])
+            ->name('order.details.index');
+
+        Route::post('/details', [OrderDetailBackendController::class, 'store'])
+            ->name('order.details.store');
+
+        Route::put('/details/{detail}', [OrderDetailBackendController::class, 'update'])
+            ->name('order.details.update');
+
+        Route::delete('/details/{detail}', [OrderDetailBackendController::class, 'destroy'])
+            ->name('order.details.destroy');
+
     Route::get('/adminpanel', [DashboardBackendController::class, 'index'])->name('backend.adminpanel');
     Route::get('/dashboard', [DashboardBackendController::class, 'index'])->name('backend.dashboard');
 
