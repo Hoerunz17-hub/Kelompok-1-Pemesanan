@@ -15,6 +15,7 @@
                                     <th scope="col">NO MEJA</th>
                                     <th scope="col">NAME</th>
                                     <th scope="col">TIPE ORDERAN</th>
+                                    <th scope="col">COST</th>
                                     <th scope="col">STATUS PAYMENT</th>
                                     <th scope="col">STATUS PAID</th>
 
@@ -22,24 +23,26 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ( $orders as $order )
                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td>02
-
-                                    </td>
-                                    <td>Otto</td>
+                                    <th scope="row">{{ $order->no_invoice }}</th>
+                                    <td>{{ $order->table_no}}</td>
+                                    <td>{{ $order->name}}</td>
                                     <td>
-                                        <span class="badge-order">Dine In</span>
+                                        <span class="badge-order">{{ $order->order_type}}</span>
                                     </td>
 
                                     <td>
-                                        <span class="badge-payment">Pending</span>
+                                        <span class="badge-payment">{{ $order->total_cost}}</span>
                                     </td>
 
                                     <td>
-                                        <span class="badge-paid">Paid</span>
+                                        <span class="badge-paid">{{ $order->status}}</span>
                                     </td>
 
+                                    <td>
+                                        <span class="badge-paid">{{ $is_paid}}is_paid</span>
+                                    </td>
 
                                     <td>
                                         <a href="/order/detail" class="btn-view">
@@ -56,7 +59,7 @@
                                     </td>
 
                                 </tr>
-
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -66,9 +69,6 @@
         <div class="overlay toggle-menu"></div>
     </div>
     <style>
-        /* ===================== */
-        /*       BADGE ORDER     */
-        /* ===================== */
         .badge-order {
             padding: 6px 14px;
             border-radius: 10px;
@@ -80,10 +80,6 @@
             display: inline-block;
         }
 
-
-        /* ===================== */
-        /*     BADGE PAYMENT     */
-        /* ===================== */
         .badge-payment {
             padding: 6px 14px;
             border-radius: 10px;
@@ -95,10 +91,6 @@
             display: inline-block;
         }
 
-
-        /* ===================== */
-        /*       BADGE PAID      */
-        /* ===================== */
         .badge-paid {
             padding: 6px 14px;
             border-radius: 10px;
@@ -110,8 +102,6 @@
             display: inline-block;
         }
 
-
-        /* Tombol DETAIL (biru yang sudah ada) */
         .btn-view {
             display: inline-flex;
             justify-content: center;
@@ -131,7 +121,6 @@
             transition: 0.2s;
         }
 
-        /* Tombol EDIT (abu gelap, mirip foto) */
         .btn-edit {
             display: inline-flex;
             justify-content: center;
@@ -142,7 +131,6 @@
             border-radius: 40px;
 
             background: linear-gradient(to right, #4a4a4a, #3b3b3b);
-            /* ABU GELAP */
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
 
             color: white;
@@ -152,7 +140,6 @@
             transition: 0.2s;
         }
 
-        /* Tombol DELETE (merah maroon sama banget seperti foto) */
         .btn-delete {
             display: inline-flex;
             justify-content: center;
@@ -172,7 +159,6 @@
             transition: 0.2s;
         }
 
-        /* Hover efek */
         .btn-edit:hover {
             background: linear-gradient(to right, #3a3a3a, #2f2f2f);
         }

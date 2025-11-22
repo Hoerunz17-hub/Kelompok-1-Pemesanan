@@ -38,7 +38,7 @@
                 <div class="d-flex gap-2 mb-3">
                     <div class="flex-fill">
                         <label class="form-label">Name</label>
-                        <input type="text" class="form-control" name="customer_name">
+                        <input type="text" class="form-control" name="name">
                     </div>
 
                     <div class="flex-fill">
@@ -52,7 +52,7 @@
                         <option value="takeaway">Take Away</option>
                     </select>
 
-                    <select class="form-select transparent-arrow" name="cashier" style="background-color:#ffe19f;">
+                    <select class="form-select transparent-arrow" name="waiters_id" style="background-color:#ffe19f;">
                         @foreach($waiters as $pelayan)
                             <option value="{{ $pelayan->id }}">{{ $pelayan->name }}</option>
                         @endforeach
