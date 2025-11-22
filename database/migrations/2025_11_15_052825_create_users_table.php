@@ -12,13 +12,17 @@ return new class extends Migration
             $table->id();
             $table->string('image')->nullable();
             $table->string('name');
+            $table->string('username')->unique()->nullable();
             $table->string('address')->nullable();
             $table->string('phonenumber', 20)->nullable();
             $table->string('email')->unique();
             $table->string('password');
 
-            $table->enum('role', ['waiter','kasir','admin','super admin'])->default('waiter');
-            $table->enum('is_active', ['active','nonactive'])->default('active');
+            // Role SESUAI database
+            $table->enum('role', ['waiters', 'admin', 'super_admin'])->default('waiters');
+
+            // Status
+            $table->enum('is_active', ['active', 'nonactive'])->default('active');
 
             $table->timestamps();
         });
