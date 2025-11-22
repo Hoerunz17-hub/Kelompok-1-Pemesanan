@@ -37,19 +37,19 @@
                                     </td>
 
                                     <td>
-                                        <span class="badge-paid">{{ $order->status}}</span>
+                                        <span class="badge-paid">{{ $order->status }}</span>
                                     </td>
 
                                     <td>
-                                        <span class="badge-paid">{{ $is_paid}}is_paid</span>
+                                        <span class="badge-paid">{{ $order->is_paid }}</span>
                                     </td>
 
                                     <td>
-                                        <a href="/order/detail" class="btn-view">
+                                        <a href="/order/detail/{{ $order->id }}" class="btn-view">
                                             <i class="fa fa-eye"></i>
                                         </a>
 
-                                        <a href="/order/payment" class="btn-edit">
+                                        <a href="/order/payment/{{ $order->id }}" class="btn-edit">
                                             <i class="fa fa-edit"></i>
                                         </a>
 
