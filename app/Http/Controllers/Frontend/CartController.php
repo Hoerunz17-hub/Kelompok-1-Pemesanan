@@ -38,37 +38,49 @@ class CartController extends Controller
 
 
     // TAMBAH ITEM KE CART
-    public function add(Request $request)
-    {
-        $cart = session()->get('cart', []);
+   public function add(Request $request)
+{
+    $cart = session()->get('cart', []);
 
-        $product_id = $request->product_id;
-        $qty = $request->qty;
+    $product_id = $request->product_id;
+    $qty = $request->qty;
 
-        $product = Product::find($product_id);
+    $product = Product::find($product_id);
 
-        if (!$product) {
-            return response()->json(['message' => 'Produk tidak ditemukan'], 404);
-        }
-
-        if (isset($cart[$product_id])) {
-            $cart[$product_id]['qty'] += $qty;
-        } else {
-            $cart[$product_id] = [
-                'id' => $product_id,
-                'name' => $product->name,
-                'price' => $product->price,
-                'qty' => $qty,
-            ];
-        }
-
-        session()->put('cart', $cart);
-
-        return response()->json([
-            'message' => 'Item ditambahkan',
-            'cart_count' => count($cart)
-        ]);
+    if (!$product) {
+        return response()->json(['message' => 'Produk tidak ditemukan'], 404);
     }
+
+    // Tambah ke cart
+    if (isset($cart[$product_id])) {
+        $cart[$product_id]['qty'] += $qty;
+    } else {
+        $cart[$product_id] = [
+            'id' => $product_id,
+            'name' => $product->name,
+            'price' => $product->price,
+            'qty' => $qty,
+        ];
+    }
+
+    session()->put('cart', $cart);
+
+    // HITUNG TOTAL CART
+    $total = 0;
+    foreach ($cart as $row) {
+        $total += $row['qty'] * $row['price'];
+    }
+
+    // RENDER ULANG CART LIST
+    $html = view('page.frontend.cart.cart-list', compact('cart'))->render();
+
+    return response()->json([
+        'message' => 'Item ditambahkan',
+        'cart_count' => count($cart),
+        'cart_total' => $total,
+        'html' => $html
+    ]);
+}
 
     // HAPUS ITEM CART
     public function remove($id)
