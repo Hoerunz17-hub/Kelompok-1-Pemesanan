@@ -39,24 +39,27 @@ class OrderBackendController extends Controller
     {
         $request->validate([
             'no_invoice'   => 'required|unique:orders',
-            'name'         => 'nullable|string',
             'waiters_id'   => 'required|exists:users,id',
-            'casier_id'    => 'nullable|exists:users,id',
             'table_no'     => 'nullable|string',
             'order_type'   => 'required|in:dine_in,takeaway',
-            'order_date'   => 'nullable|date',
             'total_cost'   => 'required|integer',
-            'discount'     => 'required|integer',
-            'grand_amount' => 'required|integer',
-            'payment_method' => 'required|in:cash,transfer,qris',
-            'is_paid'        => 'required|in:paid,unpaid',
-            'status'         => 'required|in:accepted,in_progress,finished,cancelled',
-            'note'           => 'nullable|string'
+            'name'         => 'nullable|string',
+            'note'         => 'nullable|string',
         ]);
 
-        Order::create($request->all());
+        Order::create([
+            'no_invoice'  => $request->no_invoice,
+            'waiter_id'   => $request->waiters_id,
+            'table_no'    => $request->table_no,
+            'order_type'  => $request->order_type,
+            'total_cost'  => $request->total_cost,
+            'name'        => $request->name,
+            'note'        => $request->note,
+            'status'      => 'accepted',
+            'is_paid'     => 'unpaid',
+        ]);
 
-        return redirect()->route('backend.order.index')->with('success', 'Order berhasil dibuat.');
+        return redirect()->route('backend.order.index')->with('success','Order dibuat');
     }
 
     // 📌 Lihat detail order
@@ -109,9 +112,27 @@ class OrderBackendController extends Controller
     }
 
     // 🧾 Halaman pembayaran
-    public function payment($id)
+    public function pay(Request $request, $id)
     {
+        $request->validate([
+            'discount'       => 'required|integer',
+            'grand_amount'   => 'required|integer',
+            'payment_method' => 'required|in:cash,transfer,qris',
+            'is_paid'        => 'required|in:paid,unpaid',
+            'status'         => 'required|in:finished,cancelled',
+        ]);
+
         $order = Order::findOrFail($id);
-        return view('page.backend.order.payment', compact('order'));
+
+        $order->update([
+            'discount'       => $request->discount,
+            'grand_amount'   => $request->grand_amount,
+            'payment_method' => $request->payment_method,
+            'is_paid'        => $request->is_paid,
+            'status'         => $request->status,
+        ]);
+
+        return redirect()->route('backend.order.index')->with('success','Pembayaran berhasil');
     }
+
 }

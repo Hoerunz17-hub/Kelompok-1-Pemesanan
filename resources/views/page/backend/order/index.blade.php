@@ -37,11 +37,11 @@
                                     </td>
 
                                     <td>
-                                        <span class="badge-paid">{{ $order->status}}</span>
+                                        <span class="badge-paid">{{ $order->status }}</span>
                                     </td>
 
                                     <td>
-                                        <span class="badge-paid">{{ $is_paid}}is_paid</span>
+                                        <span class="badge-paid">{{ $order->is_paid }}</span>
                                     </td>
 
                                     <td>
