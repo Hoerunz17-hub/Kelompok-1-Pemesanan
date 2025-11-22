@@ -50,7 +50,7 @@ class OrderBackendController extends Controller
             'grand_amount' => 'required|integer',
             'payment_method' => 'required|in:cash,transfer,qris',
             'is_paid'        => 'required|in:paid,unpaid',
-            'status'         => 'required|in:accepted,in_progress,served,finished,cancelled',
+            'status'         => 'required|in:accepted,in_progress,finished,cancelled',
             'note'           => 'nullable|string'
         ]);
 

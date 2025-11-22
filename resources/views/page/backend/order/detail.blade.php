@@ -1,30 +1,33 @@
   @extends('layout.backend.app')
   @section('content')
       <div class="clearfix"></div>
-
       <div class="container-fluid">
           <div class="col-lg-12">
               <div class="card">
                   <div class="card-body">
                       <h5 class="card-title">INVOIVE</h5>
-                      <div class="table-responsive">
-                          <table class="table">
-                              <thead>
-                                  <tr>
-                                      <th scope="col">NO-INVOICE</th>
-                                      <th scope="col">NO MEJA</th>
-                                      <th scope="col">NAMA</th>
-                                      <th scope="col">TYPE ORDER</th>
-                                  </tr>
-                              </thead>
-                              <tbody>
-                                  <tr>
-
-                                  </tr>
-
-                              </tbody>
-                          </table>
-                      </div>
+                         {{-- Informasi Order --}}
+                        <div class="row mb-4">
+                            <div class="col-md-4 mb-2">
+                                <strong>No Invoice:</strong> {{ $order->no_invoice ?? '-' }}
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <strong>No Meja:</strong> {{ $order->table_no ?? '-' }}
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <strong>Nama Pelanggan:</strong> {{ $order->customer->name ?? '-' }}
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <strong>Type Order:</strong>
+                                <span class="badge
+                                    @if($order->type_order == 'dine-in') bg-primary
+                                    @elseif($order->type_order == 'takeaway') bg-info
+                                    @endif">
+                                    {{ ucfirst($order->type_order ?? '-') }}
+                                </span>
+                            </div>
+                        </div>
+                        {{-- End Informasi Order --}}
                   </div>
               </div>
           </div>
@@ -71,11 +74,11 @@
                   </div>
               </div>
 
-              {{-- BOX TOTAL + WAITER --}}
+              {{-- nama waiter dan total pemesanan --}}
               <div class="card" style="background: rgba(0, 120, 160, 0.35);
         border-radius: 12px; padding: 18px;">
 
-                  {{-- TOTAL --}}
+                  {{-- total --}}
                   <div class="d-flex justify-content-between"
                       style="color:white; font-size:16px; font-weight:600; margin-bottom:14px;">
                       <span>Total</span>
@@ -84,7 +87,7 @@
 
                   <hr style="border-color: rgba(255,255,255,0.2); margin: 0 0 14px;">
 
-                  {{-- WAITER --}}
+                  {{-- waiter --}}
                   <div class="d-flex justify-content-between" style="color:white; font-size:15px; font-weight:500;">
                       <span>Waiter</span>
                       <span>Yanto</span>
