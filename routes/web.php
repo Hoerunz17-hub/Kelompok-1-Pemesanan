@@ -38,7 +38,7 @@ Route::get('/order/detail/{id}', [OrderBackendController::class, 'detail'])->nam
 Route::get('/order/payment/{id}', [OrderBackendController::class, 'payment'])->name('backend.order.payment');
 
 // CART
-Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::get('/cart', [CartController::class, 'index'])->name('page.frontend.cart.index');
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 Route::post('/cart/submit', [CartController::class, 'submitOrder'])->name('cart.submit');
