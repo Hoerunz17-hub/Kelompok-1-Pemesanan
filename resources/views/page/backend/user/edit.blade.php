@@ -12,7 +12,7 @@
                 <hr>
 
                 {{-- FORM MULAI --}}
-                <form action="{{ route('backend.user.update', $user->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('user.update', $user->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
@@ -101,7 +101,7 @@
                     {{-- SUBMIT --}}
                     <div class="form-group mt-4 text-center">
                         <button type="submit" class="btn btn-light btn-round px-5">Update</button>
-                        <a href="{{ route('backend.user.index') }}" class="btn btn-light btn-round px-5">Cancel</a>
+                        <a href="{{ route('user.index') }}" class="btn btn-light btn-round px-5">Cancel</a>
                     </div>
 
                 </form>
