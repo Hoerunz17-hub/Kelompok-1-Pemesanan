@@ -45,7 +45,7 @@
 
                 <!-- Cart -->
                 <div class="cart text-end d-none d-lg-block dropdown">
-                    <a href="{{ route('page.frontend.cart.index') }}" class="border-0 bg-transparent d-flex flex-column gap-2 lh-1 text-decoration-none">
+                    <a href="{{ route('cart.index') }}" class="border-0 bg-transparent d-flex flex-column gap-2 lh-1 text-decoration-none">
                         <span class="fs-6 text-muted dropdown-toggle">Your Cart</span>
                     </a>
                 </div>
