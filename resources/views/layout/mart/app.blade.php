@@ -11,6 +11,8 @@
     <meta name="author" content="">
     <meta name="keywords" content="">
     <meta name="description" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -78,32 +80,60 @@
             document.getElementById('cart-list').innerHTML = html;
         }
     </script>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll('.add-to-cart').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    let productId = this.dataset.id;
+                    let qty = parseInt(
+                        this.closest('.product-item').querySelector('.input-number').value
+                    );
+
+                    fetch('/cart/add', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': document.querySelector(
+                                    'meta[name="csrf-token"]').content
+                            },
+                            body: JSON.stringify({
+                                product_id: productId,
+                                qty: qty
+                            })
+                        })
+                        .then(res => res.json())
+                        .then(data => {
+                            console.log(data.message);
+                            alert("Produk berhasil ditambahkan ke cart!");
+                        });
+                });
+            });
+        });
+    </script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
 
-            document.addEventListener("click", function(e) {
-                let btn = e.target.closest(".add-to-cart");
-                if (!btn) return;
+            document.querySelectorAll(".quantity-right-plus").forEach(btn => {
+                btn.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    let input = this.closest(".product-qty").querySelector(".input-number");
+                    let oldValue = parseInt(input.value) || 1;
+                    input.value = oldValue + 1;
+                });
+            });
 
-                e.preventDefault();
-
-                let productId = btn.dataset.id;
-                let qty = 1; // default 1 untuk navbar / card kecil
-
-                fetch('/cart/add', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                    },
-                    body: JSON.stringify({
-                        product_id: productId,
-                        qty: qty
-                    })
-                })
-                .then(res => res.json())
-                .then(data => {
-                    updateCartList(data.cart);
+            document.querySelectorAll(".quantity-left-minus").forEach(btn => {
+                btn.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    let input = this.closest(".product-qty").querySelector(".input-number");
+                    let oldValue = parseInt(input.value) || 1;
+                    if (oldValue > 1) {
+                        input.value = oldValue - 1;
+                    }
                 });
             });
 

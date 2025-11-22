@@ -19,8 +19,10 @@
         <div class="d-flex justify-content-center mb-3">
             <button type="button" class="btn-close" aria-label="Close"></button>
         </div>
+
         <form action="" method="POST">
             <div class="order-md-last">
+
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
                     <span class="text-primary">Order</span>
 
@@ -32,9 +34,11 @@
                         </select>
                     </span>
                 </h4>
+
                 <ul class="list-group mb-3" id="cart-list">
                     @include('page.frontend.cart.cart-list')
                 </ul>
+
                 <div class="d-flex gap-2 mb-3">
                     <div class="flex-fill">
                         <label class="form-label">Name</label>
@@ -43,9 +47,11 @@
 
                     <div class="flex-fill">
                         <label class="form-label">No Invoice</label>
-                        <input type="text" class="form-control" name="no_invoice" value="{{ $no_invoice }}" readonly>
+                        <input type="text" class="form-control" name="no_invoice" value="{{ $no_invoice }}"
+                            readonly>
                     </div>
                 </div>
+
                 <div class="d-flex gap-2 mb-3">
                     <select class="form-select transparent-arrow" name="order_type" style="background-color:#ffe19f;">
                         <option value="dine_in">Dine In</option>
@@ -58,10 +64,12 @@
                         @endforeach
                     </select>
                 </div>
+
                 <div class="mb-3">
                     <label class="form-label">Note</label>
                     <input type="text" class="form-control" name="note" style="background-color:#ffe19f;">
                 </div>
+
                 <button type="submit" class="w-100 btn btn-primary btn-lg">
                     Konfirmasi Pesanan
                 </button>
