@@ -12,7 +12,9 @@
 
 <li class="list-group-item d-flex justify-content-between">
     <span>Total</span>
-    <strong id="cart-total">
+    <strong>
         {{ number_format(array_sum(array_map(fn($x) => $x['qty'] * $x['price'], $cart)), 0, ',', '.') }}
     </strong>
+    <input type="hidden" name="total_cost" value="{{ array_sum(array_map(fn($x) => $x['qty'] * $x['price'], $cart)) }}">
 </li>
+
