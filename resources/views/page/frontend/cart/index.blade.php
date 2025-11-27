@@ -20,7 +20,7 @@
             <a href="/" type="button" class="btn-close" aria-label="Close"></a>
         </div>
 
-        <form action="/order" method="POST">
+        <form action="{{ route('cart.submit') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="order-md-last">
 
@@ -60,7 +60,7 @@
                     </select>
 
                     <select class="form-select transparent-arrow" name="waiters_id" style="background-color:#ffe19f;">
-                        @foreach($waiters as $pelayan)
+                        @foreach ($waiters as $pelayan)
                             <option value="{{ $pelayan->id }}">{{ $pelayan->name }}</option>
                         @endforeach
                     </select>
@@ -84,6 +84,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('assetsfrontend/js/plugins.js') }}"></script>
     <script src="{{ asset('assetsfrontend/js/script.js') }}"></script>
+    <script>
+        document.querySelector("form").addEventListener("submit", function() {
+            alert("FORM DIKIRIM!");
+        });
+    </script>
+
 </body>
 
 </html>

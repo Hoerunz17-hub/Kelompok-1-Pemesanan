@@ -29,8 +29,8 @@ class OrderDetailBackendController extends Controller
         $product = Product::findOrFail($request->products_id);
 
         OrderDetail::create([
-            'orders_id'   => $order_id,
-            'products_id' => $product->id,
+            'order_id'   => $order_id,
+            'product_id' => $product->id,
             'qty'         => $request->qty,
             'price'       => $product->price,
             'total_price' => $product->price * $request->qty,

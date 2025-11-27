@@ -93,6 +93,8 @@ Route::middleware(['auth', 'role:admin,super_admin'])->group(function () {
     Route::post('/order/store', [OrderBackendController::class, 'store'])->name('order.store');
     Route::get('/order/detail/{id}', [OrderBackendController::class, 'detail'])->name('order.detail');
     Route::get('/order/payment/{id}', [OrderBackendController::class, 'payment'])->name('order.payment');
+    Route::post('/cart/submit', [CartController::class, 'submitOrder'])->name('cart.submit');
+
 
     /*
     |--------------------------------------------------------------------------
