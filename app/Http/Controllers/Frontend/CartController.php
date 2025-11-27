@@ -20,7 +20,9 @@ class CartController extends Controller
         $no_invoice = 'INV-' . date('Ymd') . '-' . str_pad($nextId, 4, '0', STR_PAD_LEFT);
 
         // Ambil data waiter
-        $waiters = User::where('role', 'waiter')->get();
+      $waiters = User::where('role', 'waiters')->get();
+
+
 
         // Ambil cart
         $cart = session('cart', []);
@@ -96,39 +98,48 @@ class CartController extends Controller
     }
 
     // SUBMIT ORDER (CART → DATABASE)
-    public function submitOrder(Request $request)
-    {
-        $cart = session('cart', []);
+  public function submitOrder(Request $request)
+{
+    $cart = session('cart', []);
 
-        if (empty($cart)) {
-            return redirect()->back()->with('error', 'Cart masih kosong');
-        }
-
-        // Buat order
-        $order = Order::create([
-            'no_invoice'    => $request->invoice_number,
-            'waiter_id'     => $request->waiter_id,
-            'no_meja'       => $request->no_meja,
-            'type_order'    => $request->type_order,
-            'note'          => $request->note,
-            'status_payment' => 'Pending',
-            'status_paid'    => 0,
-        ]);
-
-        // Simpan order item
-        foreach ($cart as $row) {
-            OrderDetail::create([
-                'order_id' => $order->id,
-                'product_id' => $row['id'],
-                'qty' => $row['qty'],
-                'price' => $row['price'],
-                'subtotal' => $row['price'] * $row['qty'],
-            ]);
-        }
-
-        // kosongkan cart
-        session()->forget('cart');
-
-        return redirect()->route('order.index')->with('success', 'Order berhasil Dibuat!');
+    if (empty($cart)) {
+        return redirect()->back()->with('error', 'Cart masih kosong');
     }
+
+    // Hitung total cost
+    $total_cost = 0;
+    foreach ($cart as $item) {
+        $total_cost += $item['qty'] * $item['price'];
+    }
+
+    // Simpan order
+    $order = Order::create([
+        'no_invoice'     => $request->no_invoice,
+        'table_no'       => $request->table_no,
+        'name'           => $request->name,
+        'order_type'     => $request->order_type,
+        'waiters_id'      => $request->waiters_id,
+        'note'           => $request->note,
+        'total_cost'     => $total_cost,
+        'status'         => 'accepted',   // WAJIB
+    'is_paid'        => 'unpaid',     // WAJIB
+    ]);
+
+    // Simpan detail
+    foreach ($cart as $row) {
+        OrderDetail::create([
+            'order_id'  => $order->id,
+            'product_id' => $row['id'],
+            'qty'       => $row['qty'],
+            'price'     => $row['price'],
+            'subtotal'  => $row['qty'] * $row['price'],
+        ]);
+    }
+
+    // Kosongkan cart
+    session()->forget('cart');
+
+    return redirect()->route('order.index')->with('success', 'Order berhasil Dibuat!');
+}
+
 }

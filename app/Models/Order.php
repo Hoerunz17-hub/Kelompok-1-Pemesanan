@@ -27,6 +27,6 @@ class Order extends Model
     // RELATION KE ORDER DETAIL
     public function details()
     {
-        return $this->hasMany(OrderDetail::class, 'orders_id');
+        return $this->hasMany(OrderDetail::class, 'order_id');
     }
 }

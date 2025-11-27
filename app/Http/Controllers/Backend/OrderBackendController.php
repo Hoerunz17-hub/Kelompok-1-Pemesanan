@@ -62,13 +62,6 @@ class OrderBackendController extends Controller
         return redirect()->route('backend.order.index')->with('success','Order dibuat');
     }
 
-    // 📌 Lihat detail order
-    public function show($id)
-    {
-        $order = Order::with(['waiter', 'casier'])->findOrFail($id);
-        return view('page.backend.order.detail', compact('order'));
-    }
-
     // 📌 Form edit order
     public function edit($id)
     {
@@ -134,5 +127,12 @@ class OrderBackendController extends Controller
 
         return redirect()->route('backend.order.index')->with('success','Pembayaran berhasil');
     }
+    public function detail($id)
+{
+    $order = Order::with('details.product')->findOrFail($id);
+
+    return view('page.backend.order.detail', compact('order'));
+}
+
 
 }
