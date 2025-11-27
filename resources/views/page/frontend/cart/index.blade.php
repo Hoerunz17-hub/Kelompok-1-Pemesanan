@@ -17,7 +17,7 @@
 <body>
     <div class="p-4 shadow rounded" style="max-width: 420px; margin: 40px auto;">
         <div class="d-flex justify-content-center mb-3">
-            <button type="button" class="btn-close" aria-label="Close"></button>
+            <a href="/" type="button" class="btn-close" aria-label="Close"></a>
         </div>
 
         <form action="/order" method="POST">

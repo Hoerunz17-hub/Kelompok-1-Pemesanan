@@ -29,7 +29,8 @@
                 <i class="zmdi zmdi-format-list-bulleted"></i> <span>Order</span>
             </a>
         </li>
-
+        <li class="sidebar-header">LAPORAN </li>
+        <li><a href="javaScript:void();"><i class="zmdi zmdi-share text-info"></i> <span>Information</span></a></li>
 
 
 
