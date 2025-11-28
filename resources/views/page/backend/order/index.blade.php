@@ -7,6 +7,7 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Table Kasir</h5>
+
                     <div class="table-responsive">
                         <table class="table table-bordered">
                             <thead>
@@ -18,56 +19,69 @@
                                     <th scope="col">COST</th>
                                     <th scope="col">STATUS PAYMENT</th>
                                     <th scope="col">STATUS PAID</th>
-
                                     <th scope="col">ACTION</th>
                                 </tr>
                             </thead>
+
                             <tbody>
-                                @foreach ( $orders as $order )
-                                <tr>
-                                    <th scope="row">{{ $order->no_invoice }}</th>
-                                    <td>{{ $order->table_no}}</td>
-                                    <td>{{ $order->name}}</td>
-                                    <td>
-                                        <span class="badge-order">{{ $order->order_type}}</span>
-                                    </td>
+                                @foreach ($orders as $order)
+                                    <tr>
+                                        <th scope="row">{{ $order->no_invoice }}</th>
+                                        <td>{{ $order->table_no }}</td>
+                                        <td>{{ $order->name }}</td>
 
-                                    <td>
-                                        <span class="badge-payment">{{ $order->total_cost}}</span>
-                                    </td>
+                                        <td>
+                                            <span class="badge-order">{{ $order->order_type }}</span>
+                                        </td>
 
-                                    <td>
-                                        <span class="badge-paid">{{ $order->status }}</span>
-                                    </td>
+                                        <td>
+                                            <span class="badge-payment">{{ $order->total_cost }}</span>
+                                        </td>
 
-                                    <td>
-                                        <span class="badge-paid">{{ $order->is_paid }}</span>
-                                    </td>
+                                        <td>
+                                            <span class="badge-paid">{{ $order->status }}</span>
+                                        </td>
 
-                                    <td>
-                                        <a href="/order/detail/{{ $order->id }}" class="btn-view">
-                                            <i class="fa fa-eye"></i>
-                                        </a>
+                                        <td>
+                                            <span class="badge-paid">{{ $order->is_paid }}</span>
+                                        </td>
 
-                                        <a href="/order/payment/{{ $order->id }}" class="btn-edit">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
+                                        <td>
 
-                                        <a href="#" class="btn-delete">
-                                            <i class="fa fa-trash"></i>
-                                        </a>
-                                    </td>
+                                            <!-- Detail -->
+                                            <a href="/order/detail/{{ $order->id }}" class="btn-view">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
 
-                                </tr>
+                                            <!-- Payment -->
+                                            <a href="{{ route('order.payment', $order->id) }}" class="btn-payment">
+                                                <i class="fa fa-credit-card"></i>
+                                            </a>
+
+                                            <!-- Delete — sudah diperbaiki -->
+                                            <form action="{{ route('order.destroy', $order->id) }}" method="POST" style="display:inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn-delete"
+                                                    onclick="return confirm('Yakin ingin menghapus order ini?')">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </form>
+
+                                        </td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
+
                 </div>
             </div>
         </div>
+
         <div class="overlay toggle-menu"></div>
     </div>
+
     <style>
         .badge-order {
             padding: 6px 14px;
@@ -76,7 +90,6 @@
             font-weight: 600;
             color: white;
             background: #28a745;
-            /* Hijau */
             display: inline-block;
         }
 
@@ -87,7 +100,6 @@
             font-weight: 600;
             color: white;
             background: #c82333;
-            /* Merah */
             display: inline-block;
         }
 
@@ -98,77 +110,49 @@
             font-weight: 600;
             color: white;
             background: #28a745;
-            /* Hijau */
             display: inline-block;
         }
 
-        .btn-view {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-
-            width: 45px;
-            height: 28px;
-            border-radius: 40px;
-
-            background: linear-gradient(to right, #1e3c72, #2a5298);
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
-
-            color: white;
-            margin-right: 5px;
-            font-size: 17px;
-            text-decoration: none;
-            transition: 0.2s;
-        }
-
-        .btn-edit {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-
-            width: 45px;
-            height: 28px;
-            border-radius: 40px;
-
-            background: linear-gradient(to right, #4a4a4a, #3b3b3b);
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
-
-            color: white;
-            margin-right: 5px;
-            font-size: 17px;
-            text-decoration: none;
-            transition: 0.2s;
-        }
-
+        .btn-view,
+        .btn-payment,
         .btn-delete {
             display: inline-flex;
             justify-content: center;
             align-items: center;
-
             width: 45px;
             height: 28px;
             border-radius: 40px;
-
-            background: linear-gradient(to right, #8d2245, #a02a58);
-            /* MERAH MAROON */
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
-
             color: white;
+            margin-right: 5px;
             font-size: 17px;
             text-decoration: none;
             transition: 0.2s;
+            border: none;
+            cursor: pointer;
         }
 
-        .btn-edit:hover {
-            background: linear-gradient(to right, #3a3a3a, #2f2f2f);
+        .btn-view {
+            background: linear-gradient(to right, #1e3c72, #2a5298);
         }
 
-        .btn-delete:hover {
-            background: linear-gradient(to right, #7c1c3c, #8d2245);
+        .btn-payment {
+            background: linear-gradient(to right, #009ffd, #2a2a72);
+        }
+
+        .btn-delete {
+            background: linear-gradient(to right, #8d2245, #a02a58);
         }
 
         .btn-view:hover {
             background: linear-gradient(to right, #182f5c, #24467f);
+        }
+
+        .btn-payment:hover {
+            background: linear-gradient(to right, #0084d6, #1e1e5c);
+        }
+
+        .btn-delete:hover {
+            background: linear-gradient(to right, #7c1c3c, #8d2245);
         }
     </style>
 @endsection
