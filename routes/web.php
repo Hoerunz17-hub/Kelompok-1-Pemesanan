@@ -2,18 +2,18 @@
 
 use Illuminate\Support\Facades\Route;
 
-// FRONTEND
+// FRONTEND CONTROLLERS
 use App\Http\Controllers\Frontend\HomeFrontendController;
 use App\Http\Controllers\Frontend\CartController;
 
-// BACKEND
+// BACKEND CONTROLLERS
 use App\Http\Controllers\Backend\DashboardBackendController;
 use App\Http\Controllers\Backend\UserBackendController;
 use App\Http\Controllers\Backend\ProductBackendController;
 use App\Http\Controllers\Backend\OrderBackendController;
 use App\Http\Controllers\Backend\OrderDetailBackendController;
 
-// AUTH CONTROLLER
+// AUTH
 use App\Http\Controllers\Auth\LoginController;
 
 /*
@@ -23,8 +23,10 @@ use App\Http\Controllers\Auth\LoginController;
 */
 Route::middleware(['auth', 'role:waiters,super_admin'])->group(function () {
 
+    // HOME
     Route::get('/', [HomeFrontendController::class, 'index'])->name('frontend.home');
 
+    // CART
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
     Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
@@ -36,18 +38,14 @@ Route::middleware(['auth', 'role:waiters,super_admin'])->group(function () {
 | AUTH
 |--------------------------------------------------------------------------
 */
-
-Route::get('/login', [LoginController::class, 'index'])
-    ->name('login')
-    ->middleware('guest');
-
-Route::post('/login', [LoginController::class, 'store'])
-    ->name('login.post')
-    ->middleware('guest');
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [LoginController::class, 'index'])->name('login');
+    Route::post('/login', [LoginController::class, 'store'])->name('login.post');
+});
 
 Route::get('/logout', [LoginController::class, 'logout'])
-    ->name('logout')
-    ->middleware('auth');
+    ->middleware('auth')
+    ->name('logout');
 
 /*
 |--------------------------------------------------------------------------
@@ -56,24 +54,25 @@ Route::get('/logout', [LoginController::class, 'logout'])
 */
 Route::middleware(['auth', 'role:admin,super_admin'])->group(function () {
 
-    // DASHBOARD
+    /*
+    |--------------------------------------------------------------------------
+    | DASHBOARD
+    |--------------------------------------------------------------------------
+    */
     Route::get('/adminpanel', [DashboardBackendController::class, 'index'])->name('adminpanel');
     Route::get('/dashboard', [DashboardBackendController::class, 'index'])->name('dashboard');
 
     /*
     |--------------------------------------------------------------------------
-    | USER (sesuai sidebar: /user)
+    | USER
     |--------------------------------------------------------------------------
     */
     Route::resource('/user', UserBackendController::class);
-
-    // 👉 **Tambah toggle user**
-    Route::post('/user/toggle/{id}', [UserBackendController::class, 'toggle'])
-        ->name('user.toggle');
+    Route::post('/user/toggle/{id}', [UserBackendController::class, 'toggle'])->name('user.toggle');
 
     /*
     |--------------------------------------------------------------------------
-    | PRODUCT (sesuai sidebar: /product)
+    | PRODUCT
     |--------------------------------------------------------------------------
     */
     Route::get('/product', [ProductBackendController::class, 'index'])->name('product.index');
@@ -86,15 +85,23 @@ Route::middleware(['auth', 'role:admin,super_admin'])->group(function () {
 
     /*
     |--------------------------------------------------------------------------
-    | ORDER (sesuai sidebar: /order)
+    | ORDER
     |--------------------------------------------------------------------------
     */
     Route::get('/order', [OrderBackendController::class, 'index'])->name('order.index');
     Route::post('/order/store', [OrderBackendController::class, 'store'])->name('order.store');
-    Route::get('/order/detail/{id}', [OrderBackendController::class, 'detail'])->name('order.detail');
-    Route::get('/order/payment/{id}', [OrderBackendController::class, 'payment'])->name('order.payment');
-    Route::post('/cart/submit', [CartController::class, 'submitOrder'])->name('cart.submit');
 
+    // Order detail page
+    Route::get('/order/detail/{id}', [OrderBackendController::class, 'detail'])->name('order.detail');
+
+    // Payment page (GET)
+    Route::get('/order/payment/{id}', [OrderBackendController::class, 'payment'])->name('order.payment');
+    
+    // Payment process (POST) — FIX 100%
+    Route::post('/order/payment/{id}/process', [OrderBackendController::class, 'processPayment'])->name('order.payment.process');
+
+    // Delete
+    Route::delete('/order/destroy/{id}', [OrderBackendController::class, 'destroy'])->name('order.destroy');
 
     /*
     |--------------------------------------------------------------------------
@@ -102,17 +109,9 @@ Route::middleware(['auth', 'role:admin,super_admin'])->group(function () {
     |--------------------------------------------------------------------------
     */
     Route::prefix('/order/{order}')->group(function () {
-
-        Route::get('/details', [OrderDetailBackendController::class, 'index'])
-            ->name('order.details.index');
-
-        Route::post('/details', [OrderDetailBackendController::class, 'store'])
-            ->name('order.details.store');
-
-        Route::put('/details/{detail}', [OrderDetailBackendController::class, 'update'])
-            ->name('order.details.update');
-
-        Route::delete('/details/{detail}', [OrderDetailBackendController::class, 'destroy'])
-            ->name('order.details.destroy');
+        Route::get('/details', [OrderDetailBackendController::class, 'index'])->name('order.details.index');
+        Route::post('/details', [OrderDetailBackendController::class, 'store'])->name('order.details.store');
+        Route::put('/details/{detail}', [OrderDetailBackendController::class, 'update'])->name('order.details.update');
+        Route::delete('/details/{detail}', [OrderDetailBackendController::class, 'destroy'])->name('order.details.destroy');
     });
 });
