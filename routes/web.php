@@ -96,12 +96,14 @@ Route::middleware(['auth', 'role:admin,super_admin'])->group(function () {
 
     // Payment page (GET)
     Route::get('/order/payment/{id}', [OrderBackendController::class, 'payment'])->name('order.payment');
-    
+
     // Payment process (POST) — FIX 100%
     Route::post('/order/payment/{id}/process', [OrderBackendController::class, 'processPayment'])->name('order.payment.process');
 
     // Delete
     Route::delete('/order/destroy/{id}', [OrderBackendController::class, 'destroy'])->name('order.destroy');
+    Route::get('/order/{id}/print', [OrderBackendController::class, 'print'])->name('order.print');
+
 
     /*
     |--------------------------------------------------------------------------

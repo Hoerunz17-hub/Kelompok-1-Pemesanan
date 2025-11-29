@@ -7,7 +7,7 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\User;
 use Illuminate\Http\Request;
-
+use PDF;
 class OrderBackendController extends Controller
 {
     /*
@@ -142,7 +142,7 @@ class OrderBackendController extends Controller
     {
         $order = Order::findOrFail($id);
         $order->delete();
-    
+
         return redirect()->route('order.index')->with('success', 'Order berhasil dihapus.');
     }
 
@@ -182,18 +182,18 @@ class OrderBackendController extends Controller
         $request->validate([
             'paid_amount' => 'required|numeric|min:0'
         ]);
-    
+
         $order = Order::findOrFail($id);
-    
+
         $total = (float) $order->total_cost;
-    
+
         // Jika nominal kurang
         if ($request->paid_amount < $total) {
             return redirect()
                 ->back()
                 ->with('error', 'Nominal pembayaran kurang.');
         }
-    
+
         $order->update([
             'is_paid'        => 'paid',
             'status'         => 'finished',
@@ -202,9 +202,23 @@ class OrderBackendController extends Controller
             'change_amount'  => (float) $request->paid_amount - $total,
             'grand_amount'   => $total,
         ]);
-    
+
         return redirect()
             ->route('order.index')
             ->with('success', 'Pembayaran berhasil.');
     }
+
+
+
+
+public function print($id)
+{
+    $order = Order::with('details.product', 'waiter', 'casier')->findOrFail($id);
+$pdf = PDF::loadView('page.backend.order.print', [
+    'order' => $order
+    ])->setPaper([0, 0, 300, 600], 'portrait'); // ukuran struk
+
+    return $pdf->stream("invoice-$order->no_invoice.pdf");
+}
+
 }
