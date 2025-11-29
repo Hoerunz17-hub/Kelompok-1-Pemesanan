@@ -8,7 +8,7 @@
     <ul class="sidebar-menu do-nicescrol">
         <li class="sidebar-header">MAIN NAVIGATION</li>
         <li class="{{ Request::is('adminpanel*') ? 'active' : '' }}">
-            <a href="adminpanel">
+            <a href="/adminpanel">
                 <i class="zmdi zmdi-view-dashboard"></i> <span>Dashboard</span>
             </a>
         </li>
@@ -30,11 +30,11 @@
             </a>
         </li>
         <li class="sidebar-header">LAPORAN </li>
-        <li><a href="javaScript:void();"><i class="zmdi zmdi-share text-info"></i> <span>Information</span></a></li>
-
-
-
-
+        <li class="{{ Request::is('report/today') ? 'active' : '' }}">
+            <a href="/report/today">
+                <i class="zmdi zmdi-info-outline text-info"></i>
+                <span>Information</span>
+            </a>
+        </li>
     </ul>
-
 </div>
