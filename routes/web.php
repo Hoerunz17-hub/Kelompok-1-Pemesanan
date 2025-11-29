@@ -114,23 +114,20 @@ Route::middleware(['auth', 'role:admin,super_admin'])->group(function () {
     */
     Route::prefix('order')->group(function () {
 
+        // Order list & create
         Route::get('/', [OrderBackendController::class, 'index'])->name('order.index');
         Route::post('/store', [OrderBackendController::class, 'store'])->name('order.store');
 
-        // Order detail page
+        // Detail order
         Route::get('/detail/{id}', [OrderBackendController::class, 'detail'])->name('order.detail');
 
-        // Payment page (GET)
+        // Payment
         Route::get('/payment/{id}', [OrderBackendController::class, 'payment'])->name('order.payment');
-
-        // Payment process (POST)
         Route::post('/payment/{id}/process', [OrderBackendController::class, 'processPayment'])
             ->name('order.payment.process');
 
         // Delete order
-        Route::delete('/destroy/{id}', [OrderBackendController::class, 'destroy'])
-            ->name('order.destroy');
-
+        Route::delete('/destroy/{id}', [OrderBackendController::class, 'destroy'])->name('order.destroy');
 
         /*
         |--------------------------------------------------------------------------
@@ -144,17 +141,10 @@ Route::middleware(['auth', 'role:admin,super_admin'])->group(function () {
             Route::delete('/{detail}', [OrderDetailBackendController::class, 'destroy'])->name('order.details.destroy');
         });
 
+        // Print
+        Route::get('/{id}/print', [OrderBackendController::class, 'print'])->name('order.print');
     });
 
-    // Payment page (GET)
-    Route::get('/order/payment/{id}', [OrderBackendController::class, 'payment'])->name('order.payment');
-
-    // Payment process (POST) — FIX 100%
-    Route::post('/order/payment/{id}/process', [OrderBackendController::class, 'processPayment'])->name('order.payment.process');
-
-    // Delete
-    Route::delete('/order/destroy/{id}', [OrderBackendController::class, 'destroy'])->name('order.destroy');
-    Route::get('/order/{id}/print', [OrderBackendController::class, 'print'])->name('order.print');
 
     /*
     |--------------------------------------------------------------------------
@@ -164,4 +154,5 @@ Route::middleware(['auth', 'role:admin,super_admin'])->group(function () {
     Route::prefix('report')->group(function () {
         Route::get('/today', [ReportController::class, 'today'])->name('report.today');
     });
-main
+
+});
