@@ -139,7 +139,7 @@ class CartController extends Controller
     // Kosongkan cart
     session()->forget('cart');
 
-    return redirect()->route('order.index')->with('success', 'Order berhasil Dibuat!');
+    return redirect()->route('frontend.home')->with('success', 'Order berhasil Dibuat!');
 }
 
 }
