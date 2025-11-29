@@ -76,10 +76,6 @@
             <td style="text-align:right;">{{ $order->waiter->name ?? '-' }}</td>
         </tr>
         <tr>
-            <td>Kasir</td>
-            <td style="text-align:right;">{{ $order->casier->name ?? '-' }}</td>
-        </tr>
-        <tr>
             <td>No Meja</td>
             <td style="text-align:right;">{{ $order->table_no }}</td>
         </tr>
@@ -121,7 +117,7 @@
         <tr>
             <td>Bayar</td>
             <td style="text-align:right;">
-                {{ number_format($order->paid_amount) }}
+                {{ number_format($order->tendered) }}
             </td>
         </tr>
 
