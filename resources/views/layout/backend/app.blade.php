@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Dashtreme Admin - Free Dashboard for Bootstrap 4 by Codervent</title>
+    <title>Warung Makan Sejahtera - Dashboard</title>
     <!-- loader-->
     <link href="{{ asset('assetsbackend/css/pace.min.css') }}" rel="stylesheet" />
     <script src="{{ asset('assetsbackend/js/pace.min.js') }}"></script>
