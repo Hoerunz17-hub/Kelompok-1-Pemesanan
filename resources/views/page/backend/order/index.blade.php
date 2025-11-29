@@ -6,8 +6,24 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Table Kasir</h5>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="card-title">Table Kasir</h5>
+                        <div class="d-flex align-items-center" style="gap:15px;">
 
+                            <input type="text" id="searchInput" class="form-control" placeholder="Search..."
+                                style="width:200px; border-radius:8px; font-size:14px;">
+
+
+
+                            <select id="isPaidFilter" class="form-control"
+                                style="width:180px; border-radius:8px; font-size:14px;">
+                                <option value="all">Status Paid (All)</option>
+                                <option value="paid">Paid</option>
+                                <option value="unpaid">Unpaid</option>
+                            </select>
+
+                        </div>
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-bordered">
                             <thead>
@@ -59,7 +75,8 @@
                                             </a>
 
                                             <!-- Delete — sudah diperbaiki -->
-                                            <form action="{{ route('order.destroy', $order->id) }}" method="POST" style="display:inline;">
+                                            <form action="{{ route('order.destroy', $order->id) }}" method="POST"
+                                                style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn-delete"
@@ -73,6 +90,8 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <div id="paginationContainer"></div>
+
                     </div>
 
                 </div>
@@ -155,4 +174,103 @@
             background: linear-gradient(to right, #7c1c3c, #8d2245);
         }
     </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+
+            const searchInput = document.getElementById("searchInput");
+            const isPaidFilter = document.getElementById("isPaidFilter");
+
+            const rows = Array.from(document.querySelectorAll("table.table tbody tr"));
+
+            const rowsPerPage = 10;
+            let currentPage = 1;
+            let filteredRows = [...rows];
+
+            // --- Pagination HTML ---
+            const pagination = document.createElement("div");
+            pagination.className = "d-flex justify-content-between align-items-center mt-3";
+
+            pagination.innerHTML = `
+            <small id="tableInfo" class="text-muted"></small>
+            <div>
+                <button id="prevBtn" class="btn btn-outline-secondary btn-sm">Prev</button>
+                <span id="pageIndicator" class="mx-2 fw-bold">1</span>
+                <button id="nextBtn" class="btn btn-outline-secondary btn-sm">Next</button>
+            </div>
+        `;
+
+            document.getElementById("paginationContainer").appendChild(pagination);
+
+            const tableInfo = pagination.querySelector("#tableInfo");
+            const prevBtn = pagination.querySelector("#prevBtn");
+            const nextBtn = pagination.querySelector("#nextBtn");
+            const pageIndicator = pagination.querySelector("#pageIndicator");
+
+            function renderTable() {
+                const total = filteredRows.length;
+                const totalPages = Math.ceil(total / rowsPerPage);
+                currentPage = Math.max(1, Math.min(currentPage, totalPages));
+
+                rows.forEach(r => r.style.display = "none");
+
+                const start = (currentPage - 1) * rowsPerPage;
+                const end = start + rowsPerPage;
+
+                filteredRows.slice(start, end).forEach(r => r.style.display = "");
+
+                tableInfo.textContent = total ?
+                    `Menampilkan ${start + 1} - ${Math.min(end, total)} dari ${total} data` :
+                    "Tidak ada data ditemukan";
+
+                pageIndicator.textContent = `${total ? currentPage : 0}/${total ? totalPages : 0}`;
+
+                prevBtn.disabled = currentPage === 1;
+                nextBtn.disabled = currentPage === totalPages || total === 0;
+            }
+
+            prevBtn.addEventListener("click", () => {
+                currentPage--;
+                renderTable();
+            });
+
+            nextBtn.addEventListener("click", () => {
+                currentPage++;
+                renderTable();
+            });
+
+            // === SEARCH ===
+            searchInput.addEventListener("keyup", function() {
+                applyFilters();
+            });
+
+            // === FILTER STATUS PAID ===
+            isPaidFilter.addEventListener("change", function() {
+                applyFilters();
+            });
+
+            function applyFilters() {
+                const keyword = searchInput.value.toLowerCase().trim();
+                const isPaidVal = isPaidFilter.value;
+
+                filteredRows = rows.filter(row => {
+                    const text = row.innerText.toLowerCase();
+                    const paidStatus = row.querySelector("td:nth-child(7)")?.innerText.trim().toLowerCase();
+
+                    let match = text.includes(keyword);
+
+                    if (isPaidVal !== "all" && paidStatus !== isPaidVal) {
+                        match = false;
+                    }
+
+                    return match;
+                });
+
+                currentPage = 1;
+                renderTable();
+            }
+
+            renderTable();
+
+        });
+    </script>
 @endsection
