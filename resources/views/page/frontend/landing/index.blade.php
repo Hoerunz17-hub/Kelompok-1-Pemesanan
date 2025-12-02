@@ -1,6 +1,10 @@
 @extends('layout.mart.app')
 
 @section('content')
+    <!-- PREMIUM TOAST -->
+    <div id="toast-premium-container" class="toast-premium-wrapper"></div>
+
+
     <!---Hero--->
     <section class="py-3"
         style="background-image: url('images/background-pattern.jpg');background-repeat: no-repeat;background-size: cover;">
@@ -436,4 +440,75 @@
             </div>
         </div>
     </section>
+    <style>
+        .toast-premium-wrapper {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* Card Toast Premium */
+        .toast-premium {
+            min-width: 280px;
+            max-width: 320px;
+            padding: 15px 20px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2), 0 0 15px rgba(0, 255, 157, 0.6);
+            color: white;
+            font-size: 15px;
+            font-weight: 500;
+            animation: slideRight 0.4s ease-out forwards;
+            opacity: 0;
+        }
+
+        /* Slide From Right */
+        @keyframes slideRight {
+            from {
+                transform: translateX(50%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .toast-premium .icon {
+            font-size: 22px;
+        }
+
+        /* Success */
+        .toast-success {
+            background: linear-gradient(135deg, #00d27f 0%, #009e60 100%);
+            box-shadow: 0 0 20px rgba(0, 255, 157, 0.7);
+        }
+
+        /* Error */
+        .toast-error {
+            background: linear-gradient(135deg, #ff4b4b 0%, #d40000 100%);
+            box-shadow: 0 0 20px rgba(255, 60, 60, 0.7);
+        }
+
+        .toast-premium .close-btn {
+            margin-left: auto;
+            cursor: pointer;
+            font-weight: bold;
+            opacity: 0.7;
+        }
+
+        .toast-premium .close-btn:hover {
+            opacity: 1;
+        }
+    </style>
 @endsection

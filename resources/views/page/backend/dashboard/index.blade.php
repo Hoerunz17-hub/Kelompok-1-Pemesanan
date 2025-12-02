@@ -85,23 +85,34 @@
         <div class="row">
             <div class="col-12 col-lg-12">
                 <div class="card">
-                    <div class="card-header">History Transaksi
-                        <div class="card-action">
-                            <div class="dropdown">
-                                <a href="javascript:void();" class="dropdown-toggle dropdown-toggle-nocaret"
-                                    data-toggle="dropdown">
-                                    <i class="icon-options"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="javascript:void();">Action</a>
-                                    <a class="dropdown-item" href="javascript:void();">Another action</a>
-                                    <a class="dropdown-item" href="javascript:void();">Something else here</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="javascript:void();">Separated link</a>
+                    <div class="card-header d-flex justify-content-between align-items-center">
+
+                        <h4 class="m-0">History Transaksi</h4>
+
+                        <div class="d-flex align-items-center gap-2">
+                            <input type="text" id="historySearch" class="form-control" placeholder="Search..."
+                                style="width:220px; border-radius:8px;">
+
+                            <div class="card-action ml-2">
+                                <div class="dropdown">
+                                    <a href="javascript:void();" class="dropdown-toggle dropdown-toggle-nocaret"
+                                        data-toggle="dropdown">
+                                        <i class="icon-options"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="javascript:void();">Action</a>
+                                        <a class="dropdown-item" href="javascript:void();">Another action</a>
+                                        <a class="dropdown-item" href="javascript:void();">Something else here</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="javascript:void();">Separated link</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
+
+
                     <div class="table-responsive">
                         <table class="table align-items-center table-flush table-borderless">
                             <thead>
@@ -115,14 +126,14 @@
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="historyTableBody">
                                 @foreach ($orders as $item)
                                     <tr>
                                         <td>{{ $item->no_invoice }}</td>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->table_no }}</td>
                                         <td>{{ $item->created_at->format('d M Y') }}</td>
-                                        <td>Rp {{ number_format($item->grand_amount) }}</td>
+                                        <td>Rp {{ number_format($item->total_cost) }}</td>
                                         <td>{{ $item->payment_method }}</td>
 
                                         <td>
@@ -136,6 +147,8 @@
                             </tbody>
 
                         </table>
+                        <div id="historyPagination"></div>
+
                     </div>
                 </div>
             </div>
@@ -186,4 +199,83 @@
             /* versi gelap saat hover */
         }
     </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+
+            const searchInput = document.getElementById("historySearch");
+            const rows = Array.from(document.querySelectorAll("#historyTableBody tr"));
+
+            const rowsPerPage = 10;
+            let currentPage = 1;
+            let filteredRows = [...rows];
+
+            const pagination = document.createElement("div");
+            pagination.className = "d-flex justify-content-between align-items-center mt-3 px-3";
+
+            pagination.innerHTML = `
+        <small id="historyInfo" class="text-muted"></small>
+        <div>
+            <button id="historyPrev" class="btn btn-outline-secondary btn-sm">Prev</button>
+            <span id="historyPage" class="mx-2 fw-bold">1</span>
+            <button id="historyNext" class="btn btn-outline-secondary btn-sm">Next</button>
+        </div>
+    `;
+
+            document.getElementById("historyPagination").appendChild(pagination);
+
+            const info = pagination.querySelector("#historyInfo");
+            const btnPrev = pagination.querySelector("#historyPrev");
+            const btnNext = pagination.querySelector("#historyNext");
+            const pageIndicator = pagination.querySelector("#historyPage");
+
+            function renderTable() {
+                const total = filteredRows.length;
+                const totalPages = Math.ceil(total / rowsPerPage);
+
+                currentPage = Math.max(1, Math.min(currentPage, totalPages));
+
+                rows.forEach(r => r.style.display = "none");
+
+                const start = (currentPage - 1) * rowsPerPage;
+                const end = start + rowsPerPage;
+
+                filteredRows.slice(start, end).forEach(r => r.style.display = "");
+
+                info.textContent = total ?
+                    `Menampilkan ${start + 1} - ${Math.min(end, total)} dari ${total} data` :
+                    "Tidak ada data ditemukan";
+
+                pageIndicator.textContent = `${total ? currentPage : 0}/${total ? totalPages : 0}`;
+
+                btnPrev.disabled = currentPage === 1;
+                btnNext.disabled = currentPage === totalPages || total === 0;
+            }
+
+            btnPrev.addEventListener("click", () => {
+                currentPage--;
+                renderTable();
+            });
+
+            btnNext.addEventListener("click", () => {
+                currentPage++;
+                renderTable();
+            });
+
+            // === SEARCH ===
+            searchInput.addEventListener("keyup", function() {
+                const keyword = this.value.toLowerCase().trim();
+
+                filteredRows = rows.filter(row =>
+                    row.innerText.toLowerCase().includes(keyword)
+                );
+
+                currentPage = 1;
+                renderTable();
+            });
+
+            // Render awal
+            renderTable();
+
+        });
+    </script>
 @endsection

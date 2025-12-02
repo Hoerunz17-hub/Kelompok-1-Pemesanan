@@ -139,6 +139,73 @@
 
         });
     </script>
+    <script>
+        function showPremiumToast(type, message) {
+            let toastContainer = document.getElementById('toast-premium-container');
+            let icon = type === 'success' ? '✔️' : '❌';
+
+            // Buat elemen toast
+            let toast = document.createElement('div');
+            toast.classList.add('toast-premium', type === 'success' ? 'toast-success' : 'toast-error');
+
+            toast.innerHTML = `
+        <div class="icon">${icon}</div>
+        <div>${message}</div>
+        <div class="close-btn" onclick="this.parentElement.remove()">×</div>
+    `;
+
+            toastContainer.appendChild(toast);
+
+            // Mainkan suara
+            document.getElementById('toastSound').play();
+
+            // Auto hilang 3 detik
+            setTimeout(() => {
+                toast.style.opacity = 0;
+                toast.style.transform = 'translateX(50%)';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+    </script>
+    <script>
+        function showToast(message, type = 'success') {
+            const toastEl = document.getElementById('mainToast');
+            const toastMessage = document.getElementById('toastMessage');
+            const toastSound = document.getElementById('toastSound'); // audio
+
+            // Set warna sesuai type
+            toastEl.className = `toast text-white bg-${type}`;
+
+            // Set pesan
+            toastMessage.innerHTML = message;
+
+            // Munculkan toast
+            const toast = new bootstrap.Toast(toastEl);
+            toast.show();
+
+            // 🔊 Putar suara
+            if (toastSound) {
+                toastSound.currentTime = 0; // restart
+                toastSound.play();
+            }
+        }
+    </script>
+
+
+    <audio id="toastSound">
+        <source src="{{ asset('sounds/notif_tokped.wav') }}" type="audio/mpeg">
+    </audio>
+    @if (session('success'))
+        <script>
+            showPremiumToast('success', "{{ session('success') }}");
+        </script>
+    @endif
+
+    @if (session('error'))
+        <script>
+            showPremiumToast('error', "{{ session('error') }}");
+        </script>
+    @endif
 
 </body>
 
