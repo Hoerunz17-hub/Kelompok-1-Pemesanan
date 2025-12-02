@@ -80,6 +80,9 @@ Route::middleware(['auth', 'role:admin,super_admin'])->group(function () {
     */
     Route::get('/adminpanel', [DashboardBackendController::class, 'index'])->name('adminpanel');
     Route::get('/dashboard', [DashboardBackendController::class, 'index'])->name('dashboard');
+    Route::get('/detail/{id}', [DashboardBackendController::class, 'detail'])->name('detail');
+
+
 
 
     /*

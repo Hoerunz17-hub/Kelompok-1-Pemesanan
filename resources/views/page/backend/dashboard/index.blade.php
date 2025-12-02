@@ -23,36 +23,57 @@
                 <div class="row row-group m-0">
                     <div class="col-12 col-lg-4 col-xl-4 border-light">
                         <div class="card-body">
-                            <h5 class="text-white mb-0">9526 <span class="float-right"><i
-                                        class="fa fa-shopping-cart"></i></span></h5>
+                            <h5 class="text-white mb-0">{{ $totalOrders }}
+                                <span class="float-right"><i class="fa fa-shopping-cart"></i></span>
+                            </h5>
                             <div class="progress my-3" style="height:3px;">
                                 <div class="progress-bar" style="width:55%"></div>
                             </div>
-                            <p class="mb-0 text-white small-font">Total Orders <span class="float-right">+4.2%
-                                    <i class="zmdi zmdi-long-arrow-up"></i></span></p>
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-4 col-xl-4 border-light">
-                        <div class="card-body">
-                            <h5 class="text-white mb-0">8323 <span class="float-right"><i class="fa fa-usd"></i></span></h5>
-                            <div class="progress my-3" style="height:3px;">
-                                <div class="progress-bar" style="width:55%"></div>
-                            </div>
-                            <p class="mb-0 text-white small-font">Total Revenue <span class="float-right">+1.2% <i
-                                        class="zmdi zmdi-long-arrow-up"></i></span>
+                            <p class="mb-0 text-white small-font">
+                                Total Orders
+                                <span class="float-right {{ $growthOrders >= 0 ? 'text-success' : 'text-danger' }}">
+                                    {{ number_format($growthOrders, 1) }}%
+                                    <i
+                                        class="zmdi {{ $growthOrders >= 0 ? 'zmdi-long-arrow-up' : 'zmdi-long-arrow-down' }}"></i>
+                                </span>
                             </p>
                         </div>
                     </div>
                     <div class="col-12 col-lg-4 col-xl-4 border-light">
                         <div class="card-body">
-                            <h5 class="text-white mb-0">6200 <span class="float-right"><i
-                                        class="fas fa-utensils"></i></span>
+                            <h5 class="text-white mb-0">{{ number_format($totalRevenue) }}
+                                <span class="float-right"><i class="fa fa-usd"></i></span>
                             </h5>
                             <div class="progress my-3" style="height:3px;">
                                 <div class="progress-bar" style="width:55%"></div>
                             </div>
-                            <p class="mb-0 text-white small-font">Visitors <span class="float-right">+5.2% <i
-                                        class="zmdi zmdi-long-arrow-up"></i></span></p>
+
+                            <p class="mb-0 text-white small-font">
+                                Total Revenue
+                                <span class="float-right {{ $growthRevenue >= 0 ? 'text-success' : 'text-danger' }}">
+                                    {{ number_format($growthRevenue, 1) }}%
+                                    <i
+                                        class="zmdi {{ $growthRevenue >= 0 ? 'zmdi-long-arrow-up' : 'zmdi-long-arrow-down' }}"></i>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-4 col-xl-4 border-light">
+                        <div class="card-body">
+                            <h5 class="text-white mb-0">{{ $totalVisitors }}
+                                <span class="float-right"><i class="fas fa-utensils"></i></span>
+                            </h5>
+                            <div class="progress my-3" style="height:3px;">
+                                <div class="progress-bar" style="width:55%"></div>
+                            </div>
+                            <p class="mb-0 text-white small-font">
+                                Visitors
+                                <span class="float-right {{ $growthVisitors >= 0 ? 'text-success' : 'text-danger' }}">
+                                    {{ number_format($growthVisitors, 1) }}%
+                                    <i
+                                        class="zmdi {{ $growthVisitors >= 0 ? 'zmdi-long-arrow-up' : 'zmdi-long-arrow-down' }}"></i>
+                                </span>
+                            </p>
                         </div>
                     </div>
 
@@ -95,25 +116,25 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>142718</td>
-                                    <td>Mamat</td>
-                                    <td>#9405822</td>
-                                    <td>3 Aug 2017</td>
-                                    <td>$ 1250.000</td>
-                                    <td>Cash</td>
-                                    <td>
-                                        <a href="#" class="btn-view">
-                                            <i class="fa fa-eye"></i>
-                                        </a>
+                                @foreach ($orders as $item)
+                                    <tr>
+                                        <td>{{ $item->no_invoice }}</td>
+                                        <td>{{ $item->name }}</td>
+                                        <td>{{ $item->table_no }}</td>
+                                        <td>{{ $item->created_at->format('d M Y') }}</td>
+                                        <td>Rp {{ number_format($item->grand_amount) }}</td>
+                                        <td>{{ $item->payment_method }}</td>
 
+                                        <td>
+                                            <a href="{{ route('detail', $item->id) }}" class="btn-view">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
 
-
-                                    </td>
-                                </tr>
-
-
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
+
                         </table>
                     </div>
                 </div>
