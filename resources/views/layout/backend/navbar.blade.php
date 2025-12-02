@@ -1,6 +1,6 @@
 <header class="topbar-nav">
     <nav class="navbar navbar-expand fixed-top">
-        
+
         <!-- LEFT -->
         <ul class="navbar-nav mr-auto align-items-center">
             <li class="nav-item">
@@ -21,11 +21,13 @@
         <ul class="navbar-nav align-items-center right-nav-link">
 
             @php
-                // Ambil foto terbaru + anti-cache
                 $user = Auth::user();
-                $photo = $user->image 
-                    ? asset('storage/' . $user->image) . '?v=' . time() 
-                    : 'https://ui-avatars.com/api/?name=' . urlencode($user->name);
+
+                // Jika user punya foto → tampilkan foto + anti cache
+                // Jika tidak → tampilkan blank-avatar
+                $photo = $user->image
+                    ? asset('storage/' . $user->image) . '?v=' . time()
+                    : asset('images/blank-avatar.png');
             @endphp
 
             <!-- PROFILE -->
@@ -39,7 +41,7 @@
                             class="img-circle"
                             width="40"
                             height="40"
-                            alt="user avatar"
+                            alt=""
                         >
 
                         <span class="ml-2 text-white font-weight-bold">
@@ -61,7 +63,7 @@
                                         src="{{ $photo }}"
                                         width="60"
                                         height="60"
-                                        alt="user avatar"
+                                        alt=""
                                     >
                                 </div>
                                 <div class="media-body">
