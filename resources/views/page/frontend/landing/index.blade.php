@@ -246,8 +246,9 @@
                                 <div
                                     class="product-grid row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
 
-                                    <div class="col">
-                                        @foreach ($menuUtama as $produk)
+
+                                    @foreach ($menuUtama as $produk)
+                                        <div class="col">
                                             <div class="product-item">
                                                 <span class="badge bg-success position-absolute m-3">-30%</span>
                                                 <a href="#" class="btn-wishlist"><svg width="24"
@@ -292,10 +293,10 @@
                                                     </a>
                                                 </div>
                                             </div>
-                                        @endforeach
 
-                                    </div>
 
+                                        </div>
+                                    @endforeach
                                 </div>
                                 <!-- / product-grid -->
 
@@ -336,8 +337,9 @@
                                 <div
                                     class="product-grid row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
 
-                                    <div class="col">
-                                        @foreach ($menuPenutup as $produk)
+
+                                    @foreach ($menuPenutup as $produk)
+                                        <div class="col">
                                             <div class="product-item">
                                                 <span class="badge bg-success position-absolute m-3">-30%</span>
                                                 <a href="#" class="btn-wishlist"><svg width="24"
@@ -382,9 +384,9 @@
                                                     </a>
                                                 </div>
                                             </div>
-                                        @endforeach
 
-                                    </div>
+                                        </div>
+                                    @endforeach
 
                                 </div>
                                 <!-- / product-grid -->
