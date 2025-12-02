@@ -31,17 +31,18 @@
                                     <tr>
                                         <th scope="row">{{ $users->firstItem() + $index }}</th>
 
-                                        {{-- IMAGE --}}
+                                        {{-- IMAGE BULAT --}}
                                         <td>
                                             @if ($user->image)
-                                                <img src="{{ asset('storage/' . $user->image) }}" alt="photo"
-                                                    class="img-fluid rounded"
-                                                    style="width:80px; height:50px; object-fit:cover;">
+                                                <img src="{{ asset('storage/' . $user->image) }}"
+                                                    class="rounded-circle"
+                                                    style="width:60px; height:60px; object-fit:cover;"
+                                                    alt="photo">
                                             @else
                                                 <img src="{{ asset('assetsbackend/images/logo-icon.png') }}"
-                                                    alt="photo"
-                                                    class="img-fluid rounded"
-                                                    style="width:80px; height:50px; object-fit:cover;">
+                                                    class="rounded-circle"
+                                                    style="width:60px; height:60px; object-fit:cover;"
+                                                    alt="photo">
                                             @endif
                                         </td>
 
