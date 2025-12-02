@@ -22,6 +22,7 @@
 
         <form action="{{ route('cart.submit') }}" method="POST" enctype="multipart/form-data">
             @csrf
+
             <div class="order-md-last">
 
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
@@ -41,15 +42,20 @@
                 </ul>
 
                 <div class="d-flex gap-2 mb-3">
+
+                    <!-- Name otomatis sesuai user login -->
                     <div class="flex-fill">
                         <label class="form-label">Name</label>
-                        <input type="text" class="form-control" name="name">
+                        <input type="text"
+                               class="form-control"
+                               name="customer_name"
+                               value="{{ Auth::user()->name }}"
+                               readonly>
                     </div>
 
                     <div class="flex-fill">
                         <label class="form-label">No Invoice</label>
-                        <input type="text" class="form-control" name="no_invoice" value="{{ $no_invoice }}"
-                            readonly>
+                        <input type="text" class="form-control" name="no_invoice" value="{{ $no_invoice }}" readonly>
                     </div>
                 </div>
 
@@ -84,11 +90,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('assetsfrontend/js/plugins.js') }}"></script>
     <script src="{{ asset('assetsfrontend/js/script.js') }}"></script>
-    <script>
-        document.querySelector("form").addEventListener("submit", function() {
-            alert("FORM DIKIRIM!");
-        });
-    </script>
 
 </body>
 

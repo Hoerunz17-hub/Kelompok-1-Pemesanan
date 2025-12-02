@@ -51,6 +51,19 @@ class UsersTableSeeder extends Seeder
                 'created_at'   => Carbon::now(),
                 'updated_at'   => Carbon::now(),
             ],
+            [
+                'image'        => 'default.png',
+                'name'         => 'Rahmat',
+                'username'     => 'rahmat',
+                'address'      => 'Langensari',
+                'phonenumber'  => '085659738675',
+                'email'        => 'rahmat@example.com',
+                'password'     => Hash::make('password123'),
+                'role'         => 'waiters',
+                'is_active'    => 'active',
+                'created_at'   => Carbon::now(),
+                'updated_at'   => Carbon::now(),
+            ],
         ]);
     }
 }
