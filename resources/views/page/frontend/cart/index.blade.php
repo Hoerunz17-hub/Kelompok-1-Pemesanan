@@ -37,46 +37,64 @@
                     </span>
                 </h4>
 
+                <!-- CART LIST -->
                 <ul class="list-group mb-3" id="cart-list">
                     @include('page.frontend.cart.cart-list')
                 </ul>
 
+                <!-- NAME & INVOICE -->
                 <div class="d-flex gap-2 mb-3">
 
-                    <!-- Name otomatis sesuai user login -->
+                    <!-- NAME manual (ambil dari tabel order jika ada) -->
                     <div class="flex-fill">
                         <label class="form-label">Name</label>
                         <input type="text"
                                class="form-control"
-                               name="customer_name"
-                               value="{{ Auth::user()->name }}"
-                               readonly>
+                               name="name"
+                               value="{{ $order->name ?? '' }}"
+                               placeholder="nama pelanggan..."
+                               required>
                     </div>
 
                     <div class="flex-fill">
                         <label class="form-label">No Invoice</label>
-                        <input type="text" class="form-control" name="no_invoice" value="{{ $no_invoice }}" readonly>
+                        <input type="text"
+                               class="form-control"
+                               name="no_invoice"
+                               value="{{ $no_invoice }}"
+                               readonly>
                     </div>
                 </div>
 
+                <!-- ORDER TYPE & WAITER -->
                 <div class="d-flex gap-2 mb-3">
-                    <select class="form-select transparent-arrow" name="order_type" style="background-color:#ffe19f;">
+                    <select class="form-select transparent-arrow"
+                            name="order_type"
+                            style="background-color:#ffe19f;">
                         <option value="dine_in">Dine In</option>
                         <option value="takeaway">Take Away</option>
                     </select>
 
-                    <select class="form-select transparent-arrow" name="waiters_id" style="background-color:#ffe19f;">
+                    <select class="form-select transparent-arrow"
+                            name="waiters_id"
+                            style="background-color:#ffe19f;">
                         @foreach ($waiters as $pelayan)
                             <option value="{{ $pelayan->id }}">{{ $pelayan->name }}</option>
                         @endforeach
                     </select>
                 </div>
 
+                <!-- NOTE -->
                 <div class="mb-3">
                     <label class="form-label">Note</label>
-                    <input type="text" class="form-control" name="note" style="background-color:#ffe19f;">
+                    <input type="text"
+                           class="form-control"
+                           name="note"
+                           style="background-color:#ffe19f;"
+                           placeholder="tambahkan catatan (opsional)">
                 </div>
 
+                <!-- SUBMIT -->
                 <button type="submit" class="w-100 btn btn-primary btn-lg">
                     Konfirmasi Pesanan
                 </button>
