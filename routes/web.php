@@ -27,7 +27,7 @@ use App\Http\Controllers\Backend\ReportController;
 | AUTH CONTROLLER
 |--------------------------------------------------------------------------
 */
-use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Backend\LoginBackendController;
 
 
 
@@ -56,11 +56,12 @@ Route::middleware(['auth', 'role:waiters,super_admin'])->group(function () {
 |--------------------------------------------------------------------------
 */
 Route::middleware('guest')->group(function () {
-    Route::get('/login', [LoginController::class, 'index'])->name('login');
-    Route::post('/login', [LoginController::class, 'store'])->name('login.post');
+    Route::get('/login', [LoginBackendController::class, 'login'])->name('login');
+    Route::post('/login', [LoginBackendController::class, 'authenticate'])->name('login.post');
 });
 
-Route::get('/logout', [LoginController::class, 'logout'])
+// Logout harus POST!
+Route::post('/logout', [LoginBackendController::class, 'logout'])
     ->middleware('auth')
     ->name('logout');
 
