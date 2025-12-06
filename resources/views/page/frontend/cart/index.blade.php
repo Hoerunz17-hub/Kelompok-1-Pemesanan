@@ -75,13 +75,8 @@
                         <option value="takeaway">Take Away</option>
                     </select>
 
-                    <select class="form-select transparent-arrow"
-                            name="waiters_id"
-                            style="background-color:#ffe19f;">
-                        @foreach ($waiters as $pelayan)
-                            <option value="{{ $pelayan->id }}">{{ $pelayan->name }}</option>
-                        @endforeach
-                    </select>
+                    <input type="text" class="form-control" value="{{ auth()->user()->name }}" readonly style="background-color:#ffe19f;">
+                    <input type="hidden" name="waiters_id" value="{{ auth()->user()->id }}">
                 </div>
 
                 <!-- NOTE -->

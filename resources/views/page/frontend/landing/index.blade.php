@@ -4,121 +4,8 @@
     <!-- PREMIUM TOAST -->
     <div id="toast-premium-container" class="toast-premium-wrapper"></div>
 
-
-    <!---Hero--->
-    <section class="py-3"
-        style="background-image: url('images/background-pattern.jpg');background-repeat: no-repeat;background-size: cover;">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-
-                    <div class="banner-blocks">
-
-                        <div class="banner-ad large bg-info block-1">
-
-                            <div class="swiper main-swiper">
-                                <div class="swiper-wrapper">
-
-                                    <div class="swiper-slide">
-                                        <div class="row banner-content p-5">
-                                            <div class="content-wrapper col-md-7">
-                                                <div class="categories my-3">Best Selling</div>
-                                                <h3 class="display-4">Wedding Cake & Birthday Cake</h3>
-                                                <p>Dari ulang tahun hingga pernikahan, CakeMart siap maniskan setiap momen
-                                                    indah dengan cake istimewa</p>
-                                            </div>
-                                            <div class="img-wrapper col-md-5">
-                                                <img src="{{ asset('assetsfrontend/images/pinkcake-no-bg.png') }}"
-                                                    class="img-fluid cake-img">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="swiper-slide">
-                                        <div class="row banner-content p-5">
-                                            <div class="content-wrapper col-md-7">
-                                                <div class="categories mb-3 pb-3">100% natural</div>
-                                                <h3 class="banner-title">Fresh Smoothie & Summer Juice</h3>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dignissim massa
-                                                    diam elementum.</p>
-                                                <a href="#"
-                                                    class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">Shop
-                                                    Collection</a>
-                                            </div>
-                                            <div class="img-wrapper col-md-5">
-                                                <img src="{{ asset('assetsfrontend/images/product-thumb-1.png') }}"
-                                                    class="img-fluid">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="swiper-slide">
-                                        <div class="row banner-content p-5">
-                                            <div class="content-wrapper col-md-7">
-                                                <div class="categories mb-3 pb-3">100% natural</div>
-                                                <h3 class="banner-title">Heinz Tomato Ketchup</h3>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dignissim massa
-                                                    diam elementum.</p>
-                                                <a href="#"
-                                                    class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">Shop
-                                                    Collection</a>
-                                            </div>
-                                            <div class="img-wrapper col-md-5">
-                                                <img src="{{ asset('assetsfrontend/images/product-thumb-2.png') }}"
-                                                    class="img-fluid">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="swiper-pagination"></div>
-
-                            </div>
-                        </div>
-
-                        <div class="banner-ad bg-success-subtle block-2"
-                            style="background:url('images/ad-image-1.png') no-repeat;background-position: right bottom">
-                            <div class="row banner-content p-5">
-
-                                <div class="content-wrapper col-md-7">
-                                    <div class="categories sale mb-3 pb-3">20% off</div>
-                                    <h3 class="banner-title">Fruits & Vegetables</h3>
-                                    <a href="#" class="d-flex align-items-center nav-link">Shop Collection <svg
-                                            width="24" height="24">
-                                            <use xlink:href="#arrow-right"></use>
-                                        </svg></a>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="banner-ad bg-danger block-3"
-                            style="background:url('images/ad-image-2.png') no-repeat;background-position: right bottom">
-                            <div class="row banner-content p-5">
-
-                                <div class="content-wrapper col-md-7">
-                                    <div class="categories sale mb-3 pb-3">15% off</div>
-                                    <h3 class="item-title">Baked Products</h3>
-                                    <a href="#" class="d-flex align-items-center nav-link">Shop Collection <svg
-                                            width="24" height="24">
-                                            <use xlink:href="#arrow-right"></use>
-                                        </svg></a>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                    <!-- / Banner Blocks -->
-
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!---Menu Pembuka--->
     <!-- Menu Pembuka -->
-    <section class="py-5">
+    <section >
         <div class="container-fluid">
 
             <div class="row">
@@ -127,16 +14,6 @@
                     <div class="bootstrap-tabs product-tabs">
                         <div class="tabs-header d-flex justify-content-between border-bottom my-5">
                             <h3>Makanan Pembuka</h3>
-                            <nav>
-                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                    <a href="#" class="nav-link active" id="tab-pembuka-all" data-bs-toggle="tab"
-                                        data-bs-target="#pane-pembuka-all">All</a>
-                                    <a href="#" class="nav-link text-uppercase fs-6" id="nav-fruits-tab"
-                                        data-bs-toggle="tab" data-bs-target="#nav-fruits">Fruits & Veges</a>
-                                    <a href="#" class="nav-link text-uppercase fs-6" id="nav-juices-tab"
-                                        data-bs-toggle="tab" data-bs-target="#nav-juices">Juices</a>
-                                </div>
-                            </nav>
                         </div>
 
                         <div class="tab-content" id="nav-tabContent">
@@ -148,7 +25,6 @@
                                     @foreach ($menuPembuka as $produk)
                                         <div class="col">
                                             <div class="product-item">
-                                                <span class="badge bg-success position-absolute m-3">-30%</span>
 
                                                 <a href="#" class="btn-wishlist">
                                                     <svg width="24" height="24">
@@ -163,7 +39,7 @@
                                                     </a>
                                                 </figure>
 
-                                                <h3>{{ $produk->name }}</h3>
+                                                <h4>{{ $produk->name }}</h4>
                                                 <span class="price">{{ $produk->price }}</span>
 
                                                 <div class="d-flex align-items-center justify-content-between">
@@ -232,16 +108,6 @@
                     <div class="bootstrap-tabs product-tabs">
                         <div class="tabs-header d-flex justify-content-between border-bottom my-5">
                             <h3>Makanan Utama</h3>
-                            <nav>
-                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                    <a href="#" class="nav-link text-uppercase fs-6 active" id="tab-utama-all"
-                                        data-bs-toggle="tab" data-bs-target="#pane-utama-all">All</a>
-                                    <a href="#" class="nav-link text-uppercase fs-6" id="nav-fruits-tab"
-                                        data-bs-toggle="tab" data-bs-target="#nav-fruits">Fruits & Veges</a>
-                                    <a href="#" class="nav-link text-uppercase fs-6" id="nav-juices-tab"
-                                        data-bs-toggle="tab" data-bs-target="#nav-juices">Juices</a>
-                                </div>
-                            </nav>
                         </div>
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="pane-pembuka-all" role="tabpanel"
@@ -254,7 +120,6 @@
                                     @foreach ($menuUtama as $produk)
                                         <div class="col">
                                             <div class="product-item">
-                                                <span class="badge bg-success position-absolute m-3">-30%</span>
                                                 <a href="#" class="btn-wishlist"><svg width="24"
                                                         height="24">
                                                         <use xlink:href="#heart"></use>
@@ -323,16 +188,6 @@
                     <div class="bootstrap-tabs product-tabs">
                         <div class="tabs-header d-flex justify-content-between border-bottom my-5">
                             <h3>Makanan Penutup</h3>
-                            <nav>
-                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                    <a href="#" class="nav-link text-uppercase fs-6 active" id="tab-penutup-all"
-                                        data-bs-toggle="tab" data-bs-target="#pane-penutup-all">All</a>
-                                    <a href="#" class="nav-link text-uppercase fs-6" id="nav-fruits-tab"
-                                        data-bs-toggle="tab" data-bs-target="#nav-fruits">Fruits & Veges</a>
-                                    <a href="#" class="nav-link text-uppercase fs-6" id="nav-juices-tab"
-                                        data-bs-toggle="tab" data-bs-target="#nav-juices">Juices</a>
-                                </div>
-                            </nav>
                         </div>
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="pane-penutup-all" role="tabpanel"
@@ -345,7 +200,6 @@
                                     @foreach ($menuPenutup as $produk)
                                         <div class="col">
                                             <div class="product-item">
-                                                <span class="badge bg-success position-absolute m-3">-30%</span>
                                                 <a href="#" class="btn-wishlist"><svg width="24"
                                                         height="24">
                                                         <use xlink:href="#heart"></use>
@@ -404,42 +258,6 @@
         </div>
     </section>
 
-    <section class="py-5">
-        <div class="container-fluid">
-            <div class="row">
-
-                <div class="col-md-6">
-                    <div class="banner-ad bg-danger mb-3"
-                        style="background: url('images/ad-image-3.png');background-repeat: no-repeat;background-position: right bottom;">
-                        <div class="banner-content p-5">
-
-                            <div class="categories text-primary fs-3 fw-bold">Upto 25% Off</div>
-                            <h3 class="banner-title">Luxa Dark Chocolate</h3>
-                            <p>Very tasty & creamy vanilla flavour creamy muffins.</p>
-                            <a href="#" class="btn btn-dark text-uppercase">Show Now</a>
-
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="banner-ad bg-info"
-                        style="background: url('images/ad-image-4.png');background-repeat: no-repeat;background-position: right bottom;">
-                        <div class="banner-content p-5">
-
-                            <div class="categories text-primary fs-3 fw-bold">Upto 25% Off</div>
-                            <h3 class="banner-title">Creamy Muffins</h3>
-                            <p>Very tasty & creamy vanilla flavour creamy muffins.</p>
-                            <a href="#" class="btn btn-dark text-uppercase">Show Now</a>
-
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
     <style>
         .toast-premium-wrapper {
             position: fixed;
@@ -451,7 +269,6 @@
             gap: 10px;
         }
 
-        /* Card Toast Premium */
         .toast-premium {
             min-width: 280px;
             max-width: 320px;
@@ -471,7 +288,6 @@
             opacity: 0;
         }
 
-        /* Slide From Right */
         @keyframes slideRight {
             from {
                 transform: translateX(50%);
@@ -494,7 +310,6 @@
             box-shadow: 0 0 20px rgba(0, 255, 157, 0.7);
         }
 
-        /* Error */
         .toast-error {
             background: linear-gradient(135deg, #ff4b4b 0%, #d40000 100%);
             box-shadow: 0 0 20px rgba(255, 60, 60, 0.7);
@@ -510,5 +325,13 @@
         .toast-premium .close-btn:hover {
             opacity: 1;
         }
+
+        .tab-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
     </style>
 @endsection

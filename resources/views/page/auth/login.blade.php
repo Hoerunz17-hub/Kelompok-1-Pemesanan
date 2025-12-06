@@ -16,10 +16,6 @@
     <div class="card-body">
       <div class="card-content p-2">
 
-        <div class="text-center mb-3">
-          <img src="{{ asset('assetsbackend/images/logo-icon.png') }}" alt="logo">
-        </div>
-
         <div class="card-title text-uppercase text-center py-3">Login</div>
 
         <form method="POST" action="{{ route('login.post') }}">
