@@ -11,14 +11,14 @@
         {{-- ================= SUPER ADMIN (SEMUA MENU MUNCUL) ================= --}}
         @if(Auth::user()->role == 'super_admin')
 
-            <li class="{{ Request::is('adminpanel*') ? 'active' : '' }}">
+            <li class="{{ request()->is('adminpanel') || request()->is('dashboard') || request()->is('detail*') ? 'active' : '' }}">
                 <a href="/adminpanel">
                     <i class="zmdi zmdi-view-dashboard"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
 
-            <li class="{{ Request::is('user*') ? 'active' : '' }}">
+            <li class="{{ Request::is('user*') ? 'active' : '' }}"> 
                 <a href="/user">
                     <i class="zmdi zmdi-accounts"></i>
                     <span>User</span>
@@ -51,7 +51,7 @@
         {{-- ================= ADMIN (Dashboard + Order saja) ================= --}}
         @elseif(Auth::user()->role == 'admin')
 
-            <li class="{{ Request::is('adminpanel*') ? 'active' : '' }}">
+            <li class="{{ request()->is('adminpanel') || request()->is('dashboard') || request()->is('detail*') ? 'active' : '' }}">
                 <a href="/adminpanel">
                     <i class="zmdi zmdi-view-dashboard"></i>
                     <span>Dashboard</span>

@@ -101,7 +101,7 @@
                             </div>
                         @endif
 
-                        <a href="{{ route('dashboard') }}" class="btn btn-dark mt-3">
+                        <a href="{{ url()->previous() }}" class="btn btn-dark mt-3">
                             <i class="fa fa-arrow-left"></i> Kembali
                         </a>
 
