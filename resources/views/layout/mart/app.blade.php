@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>FoodMart - Free eCommerce Grocery Store HTML Website Template</title>
+    <title>Warung Makan Sejahtera</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,11 +31,6 @@
 <body>
 
     @include('layout.mart.svg')
-
-    <div class="preloader-wrapper">
-        <div class="preloader">
-        </div>
-    </div>
 
     @include('layout.mart.navbar')
 

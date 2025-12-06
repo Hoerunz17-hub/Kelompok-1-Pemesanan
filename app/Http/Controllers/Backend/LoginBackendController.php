@@ -32,9 +32,10 @@ class LoginBackendController extends Controller
         // Ambil role user
         $role = Auth::user()->role;
 
-        // Redirect berdasarkan role
         switch ($role) {
             case 'admin':
+                return redirect('/order');
+
             case 'super_admin':
                 return redirect('/adminpanel');
 

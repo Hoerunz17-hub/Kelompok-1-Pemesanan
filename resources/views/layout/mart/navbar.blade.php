@@ -1,101 +1,76 @@
 <header>
-  <div class="container-fluid">
-    <div class="row py-3 border-bottom">
+      <div class="container-fluid">
+        <div class="row py-3 border-bottom">
 
-      <!-- Logo -->
-      <div class="col-sm-4 col-lg-3 text-center text-sm-start">
-        <div class="main-logo">
-          <a href="{{ route('frontend.home') }}">
-            <img src="{{ asset('assetsfrontend/images/CAKEMART.png') }}" alt="logo" class="img-fluid" style="width:241px; height:54px;">
-          </a>
-        </div>
-      </div>
-
-      <!-- Support & Icons -->
-      <div class="col-6 col-lg-8">
-        <div class="d-flex justify-content-end align-items-center gap-4">
-
-          <!-- Support -->
-          <div class="text-end d-none d-md-block">
-            <span class="fs-6 text-muted">For Support?</span>
-            <h6 class="mb-0 fw-bold">+62 878 123 456</h6>
-          </div>
-
-          <!-- Icons & User Dropdown -->
-          <ul class="d-flex justify-content-end list-unstyled m-0 align-items-center">
-
-            <!-- User Dropdown (Logout) -->
-            <li class="dropdown">
-              <a href="#" class="rounded-circle bg-light p-2 mx-1 dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                <svg width="24" height="24" viewBox="0 0 24 24"><use xlink:href="#user"></use></svg>
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                <li>
-                  <form action="{{ route('logout') }}" method="POST">
-                    @csrf
-                    <button type="submit" class="dropdown-item">Logout</button>
-                  </form>
-                </li>
-              </ul>
-            </li>
-
-            <!-- Heart Icon -->
-            <li>
-              <a href="#" class="rounded-circle bg-light p-2 mx-1">
-                <svg width="24" height="24" viewBox="0 0 24 24"><use xlink:href="#heart"></use></svg>
-              </a>
-            </li>
-
-            <!-- Mobile Cart & Search -->
-            <li class="d-lg-none">
-              <a href="#" class="rounded-circle bg-light p-2 mx-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
-                <svg width="24" height="24" viewBox="0 0 24 24"><use xlink:href="#cart"></use></svg>
-              </a>
-            </li>
-            <li class="d-lg-none">
-              <a href="#" class="rounded-circle bg-light p-2 mx-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSearch" aria-controls="offcanvasSearch">
-                <svg width="24" height="24" viewBox="0 0 24 24"><use xlink:href="#search"></use></svg>
-              </a>
-            </li>
-          </ul>
-
-          <!-- Cart Desktop -->
-          <div class="cart text-end d-none d-lg-block dropdown">
-            <a href="{{ route('cart.index') }}" class="border-0 bg-transparent d-flex flex-column gap-2 lh-1 text-decoration-none">
-              <span class="fs-6 text-muted dropdown-toggle">Your Cart</span>
-            </a>
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- Navigation -->
-  <div class="container-fluid">
-    <div class="row py-3">
-      <div class="d-flex justify-content-center justify-content-sm-between align-items-center">
-        <nav class="main-menu d-flex navbar navbar-expand-lg">
-
-          <!-- Navbar Toggler -->
-          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-            aria-controls="offcanvasNavbar">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <!-- Offcanvas Menu -->
-          <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-            <div class="offcanvas-header justify-content-center">
-              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-              <!-- Tambahkan menu navigasi di sini -->
+          <div class="col-sm-4 col-lg-3 text-center text-sm-start">
+            <div class="main-logo">
             </div>
           </div>
 
-        </nav>
+          <div class="col-6 col-lg-8">
+            <div class="d-flex justify-content-end align-items-center gap-4">
+
+                <!-- Support -->
+                <div class="text-end d-none d-md-block">
+                <span class="fs-6 text-muted">Waiters Menu</span>
+                <h6 class="mb-0 fw-bold">Warung Makan Sejahtera</h6>
+                </div>
+
+                <!-- Ikon -->
+                <ul class="d-flex justify-content-end list-unstyled m-0">
+                    <li class="dropdown">
+                        <a href="#"
+                        class="rounded-circle bg-light p-2 mx-1"
+                        id="userMenu"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                            <svg width="24" height="24" viewBox="0 0 24 24">
+                                <use xlink:href="#user"></use>
+                            </svg>
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+                            <li>
+                                <a class="dropdown-item" href="#">Profil</a>
+                            </li>
+                            <li>
+                                <form action="{{ route('logout') }}" method="POST" class="m-0">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item text-danger">
+                                        Logout
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <li>
+                        <a href="#" class="rounded-circle bg-light p-2 mx-1">
+                        <svg width="24" height="24" viewBox="0 0 24 24"><use xlink:href="#heart"></use></svg>
+                        </a>
+                    </li>
+                    <li class="d-lg-none">
+                        <a href="#" class="rounded-circle bg-light p-2 mx-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
+                        <svg width="24" height="24" viewBox="0 0 24 24"><use xlink:href="#cart"></use></svg>
+                        </a>
+                    </li>
+                    <li class="d-lg-none">
+                        <a href="#" class="rounded-circle bg-light p-2 mx-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSearch" aria-controls="offcanvasSearch">
+                        <svg width="24" height="24" viewBox="0 0 24 24"><use xlink:href="#search"></use></svg>
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Cart -->
+                <div class="cart text-end d-none d-lg-block dropdown">
+                    <a href="{{ route('cart.index') }}" class="border-0 bg-transparent d-flex flex-column gap-2 lh-1 text-decoration-none">
+                        <span class="fs-6 text-muted dropdown-toggle">Your Cart</span>
+                    </a>
+                </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</header>
+
+    </header>
