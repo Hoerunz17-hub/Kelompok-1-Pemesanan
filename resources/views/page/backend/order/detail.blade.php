@@ -147,6 +147,10 @@
 
             </div>
 
+            <a href="{{ url()->previous() }}" class="btn btn-dark mt-3">
+                <i class="fa fa-arrow-left"></i> Kembali
+            </a>
+
         </div>
 
         <div class="overlay toggle-menu"></div>
