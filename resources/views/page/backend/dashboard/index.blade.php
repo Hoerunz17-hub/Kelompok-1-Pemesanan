@@ -31,11 +31,7 @@
                             </div>
                             <p class="mb-0 text-white small-font">
                                 Total Orders
-                                <span class="float-right {{ $growthOrders >= 0 ? 'text-success' : 'text-danger' }}">
-                                    {{ number_format($growthOrders, 1) }}%
-                                    <i
-                                        class="zmdi {{ $growthOrders >= 0 ? 'zmdi-long-arrow-up' : 'zmdi-long-arrow-down' }}"></i>
-                                </span>
+
                             </p>
                         </div>
                     </div>
@@ -50,11 +46,7 @@
 
                             <p class="mb-0 text-white small-font">
                                 Total Revenue
-                                <span class="float-right {{ $growthRevenue >= 0 ? 'text-success' : 'text-danger' }}">
-                                    {{ number_format($growthRevenue, 1) }}%
-                                    <i
-                                        class="zmdi {{ $growthRevenue >= 0 ? 'zmdi-long-arrow-up' : 'zmdi-long-arrow-down' }}"></i>
-                                </span>
+
                             </p>
                         </div>
                     </div>
@@ -68,11 +60,7 @@
                             </div>
                             <p class="mb-0 text-white small-font">
                                 Visitors
-                                <span class="float-right {{ $growthVisitors >= 0 ? 'text-success' : 'text-danger' }}">
-                                    {{ number_format($growthVisitors, 1) }}%
-                                    <i
-                                        class="zmdi {{ $growthVisitors >= 0 ? 'zmdi-long-arrow-up' : 'zmdi-long-arrow-down' }}"></i>
-                                </span>
+
                             </p>
                         </div>
                     </div>
