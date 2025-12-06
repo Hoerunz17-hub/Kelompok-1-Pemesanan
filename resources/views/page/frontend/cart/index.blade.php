@@ -48,45 +48,34 @@
                     <!-- NAME manual (ambil dari tabel order jika ada) -->
                     <div class="flex-fill">
                         <label class="form-label">Name</label>
-                        <input type="text"
-                               class="form-control"
-                               name="name"
-                               value="{{ $order->name ?? '' }}"
-                               placeholder="nama pelanggan..."
-                               required>
+                        <input type="text" class="form-control" name="name" value=""
+                            placeholder="nama pelanggan..." required>
                     </div>
 
                     <div class="flex-fill">
                         <label class="form-label">No Invoice</label>
-                        <input type="text"
-                               class="form-control"
-                               name="no_invoice"
-                               value="{{ $no_invoice }}"
-                               readonly>
+                        <input type="text" class="form-control" name="no_invoice" value="{{ $no_invoice }}"
+                            readonly>
                     </div>
                 </div>
 
                 <!-- ORDER TYPE & WAITER -->
                 <div class="d-flex gap-2 mb-3">
-                    <select class="form-select transparent-arrow"
-                            name="order_type"
-                            style="background-color:#ffe19f;">
+                    <select class="form-select transparent-arrow" name="order_type" style="background-color:#ffe19f;">
                         <option value="dine_in">Dine In</option>
                         <option value="takeaway">Take Away</option>
                     </select>
 
-                    <input type="text" class="form-control" value="{{ auth()->user()->name }}" readonly style="background-color:#ffe19f;">
+                    <input type="text" class="form-control" value="{{ auth()->user()->name }}" readonly
+                        style="background-color:#ffe19f;">
                     <input type="hidden" name="waiters_id" value="{{ auth()->user()->id }}">
                 </div>
 
                 <!-- NOTE -->
                 <div class="mb-3">
                     <label class="form-label">Note</label>
-                    <input type="text"
-                           class="form-control"
-                           name="note"
-                           style="background-color:#ffe19f;"
-                           placeholder="tambahkan catatan (opsional)">
+                    <input type="text" class="form-control" name="note" style="background-color:#ffe19f;"
+                        placeholder="tambahkan catatan (opsional)">
                 </div>
 
                 <!-- SUBMIT -->
