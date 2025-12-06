@@ -73,7 +73,7 @@ class UserBackendController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
-    
+
         $request->validate([
             'name'        => 'required|string|max:255',
             'address'     => 'nullable|string',
@@ -84,27 +84,27 @@ class UserBackendController extends Controller
             'image'       => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'password'    => 'nullable|string|min:4'
         ]);
-    
+
         $data = $request->only(['name','address','phonenumber','email','role','is_active']);
-    
+
         if (!empty($request->password)) {
             $data['password'] = Hash::make($request->password);
         }
-    
+
         if ($request->hasFile('image')) {
             if ($user->image) {
                 Storage::disk('public')->delete($user->image);
             }
             $data['image'] = $request->file('image')->store('user', 'public');
         }
-    
+
         $user->update($data);
-    
-        // 🔥 AGAR NAVBAR MENGGANTI FOTO TANPA HARUS LOGOUT / RELOGIN
+
+        //AGAR NAVBAR MENGGANTI FOTO TANPA HARUS LOGOUT / RELOGIN
         if (auth()->id() == $user->id) {
             auth()->user()->refresh();
         }
-    
+
         return redirect()->route('user.index')->with('success', 'User berhasil diupdate!');
     }
 

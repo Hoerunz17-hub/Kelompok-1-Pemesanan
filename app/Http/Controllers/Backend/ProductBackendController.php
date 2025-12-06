@@ -9,21 +9,21 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductBackendController extends Controller
 {
-    // 📌 Tampilkan semua data
+    //Tampilkan semua data
     public function index()
     {
         $products = Product::orderBy('id', 'asc')->paginate(10);
         return view('page.backend.product.index', compact('products'));
     }
 
-   // 📌 Form create
+   //Form create
     public function create()
     {
         $products = Product::all(); // mengikuti pola Aboutus::all()
         return view('page.backend.product.create', compact('products'));
     }
 
-    // 📌 Store data baru
+    //Store data baru
     public function store(Request $request)
     {
         $request->validate([
@@ -48,7 +48,7 @@ class ProductBackendController extends Controller
         return redirect('/product')->with('success', 'Produk berhasil ditambahkan');
     }
 
-    // 📌 Delete data
+    //Delete data
     public function destroy($id)
     {
         $product = Product::find($id);
@@ -65,7 +65,7 @@ class ProductBackendController extends Controller
         }
     }
 
-    // 📌 Form edit
+    //Form edit
     public function edit($id)
     {
         $product = Product::find($id);
@@ -77,7 +77,7 @@ class ProductBackendController extends Controller
         return view('page.backend.product.edit', compact('product'));
     }
 
-    // 📌 Update produk
+    //Update produk
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -109,7 +109,7 @@ class ProductBackendController extends Controller
         return redirect('/product')->with('success', 'Produk berhasil diperbarui');
     }
 
-    // 📌 Toggle status
+    //Toggle status
     public function toggle(Request $request, $id)
     {
         $product = Product::findOrFail($id);

@@ -10,11 +10,6 @@ use Illuminate\Http\Request;
 use PDF;
 class OrderBackendController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | INDEX
-    |--------------------------------------------------------------------------
-    */
     public function index()
     {
         $orders = Order::with(['waiter', 'casier'])
@@ -24,11 +19,6 @@ class OrderBackendController extends Controller
         return view('page.backend.order.index', compact('orders'));
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | CREATE
-    |--------------------------------------------------------------------------
-    */
     public function create()
     {
         $waiters = User::where('role', 'waiter')->get();
@@ -43,11 +33,6 @@ class OrderBackendController extends Controller
         return view('page.backend.order.create', compact('waiters', 'cashiers', 'no_invoice'));
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | STORE
-    |--------------------------------------------------------------------------
-    */
     public function store(Request $request)
     {
         $request->validate([
@@ -75,11 +60,6 @@ class OrderBackendController extends Controller
         return redirect()->route('order.index')->with('success', 'Order berhasil dibuat.');
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | EDIT
-    |--------------------------------------------------------------------------
-    */
     public function edit($id)
     {
         $order = Order::findOrFail($id);
@@ -89,11 +69,6 @@ class OrderBackendController extends Controller
         return view('page.backend.order.edit', compact('order', 'waiters', 'cashiers'));
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | UPDATE
-    |--------------------------------------------------------------------------
-    */
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -133,11 +108,6 @@ class OrderBackendController extends Controller
         return redirect()->route('order.index')->with('success', 'Order berhasil diperbarui.');
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | DELETE
-    |--------------------------------------------------------------------------
-    */
     public function destroy($id)
     {
         $order = Order::findOrFail($id);
@@ -146,11 +116,6 @@ class OrderBackendController extends Controller
         return redirect()->route('order.index')->with('success', 'Order berhasil dihapus.');
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | DETAIL PAGE
-    |--------------------------------------------------------------------------
-    */
     public function detail($id)
     {
         $order = Order::with(['details.product', 'waiter', 'casier'])
@@ -159,11 +124,6 @@ class OrderBackendController extends Controller
         return view('page.backend.order.detail', compact('order'));
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | PAYMENT PAGE
-    |--------------------------------------------------------------------------
-    */
     public function payment($id)
     {
         $order = Order::with(['details.product', 'waiter', 'casier'])->findOrFail($id);
@@ -172,11 +132,7 @@ class OrderBackendController extends Controller
         return view('page.backend.order.payment', compact('order', 'details'));
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | PROCESS PAYMENT
-    |--------------------------------------------------------------------------
-    */
+
     public function processPayment(Request $request, $id)
     {
         $request->validate([
