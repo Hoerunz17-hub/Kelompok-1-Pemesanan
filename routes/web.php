@@ -150,13 +150,20 @@ Route::middleware(['auth', 'role:admin,super_admin'])->group(function () {
     });
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | REPORT (Laporan)
-    |--------------------------------------------------------------------------
-    */
-    Route::prefix('report')->group(function () {
-        Route::get('/today', [ReportController::class, 'today'])->name('report.today');
-    });
+   /*
+|--------------------------------------------------------------------------
+| REPORT (Laporan)
+|--------------------------------------------------------------------------
+*/
+Route::prefix('report')->group(function () {
+
+    Route::get('/today', [ReportController::class, 'today'])
+        ->name('report.today');
+
+    Route::get('/print', [ReportController::class, 'print'])
+        ->name('report.print');
+
+});
+
 
 });
