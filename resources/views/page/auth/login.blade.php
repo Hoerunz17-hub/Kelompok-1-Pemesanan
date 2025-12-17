@@ -24,15 +24,24 @@
           {{-- Email --}}
           <div class="form-group">
             <label>Email</label>
-            <input type="email" name="email" class="form-control input-shadow"
-                   placeholder="Enter Email" value="{{ old('email') }}" required>
+            <input
+              type="email"
+              name="email"
+              class="form-control input-shadow"
+              placeholder="Enter Email"
+              value="{{ old('email') }}"
+              required>
           </div>
 
           {{-- Password --}}
           <div class="form-group">
             <label>Password</label>
-            <input type="password" name="password"
-                   class="form-control input-shadow" required>
+            <input
+              type="password"
+              name="password"
+              class="form-control input-shadow"
+              placeholder="Enter Password"
+              required>
           </div>
 
           {{-- Role --}}
@@ -40,15 +49,17 @@
             <label>Role</label>
             <select name="role" class="form-control" required>
               <option value="">-- Select Role --</option>
-              <option value="waiters">Waiters</option>
-              <option value="admin">Admin</option>
-              <option value="super_admin">Super Admin</option>
+              <option value="waiters" {{ old('role') == 'waiters' ? 'selected' : '' }}>Waiters</option>
+              <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
+              <option value="super_admin" {{ old('role') == 'super_admin' ? 'selected' : '' }}>Super Admin</option>
             </select>
           </div>
 
           {{-- Error Message --}}
           @error('login')
-            <span class="text-danger small">{{ $message }}</span>
+            <div class="alert alert-danger mt-2 p-2 text-center">
+              {{ $message }}
+            </div>
           @enderror
 
           {{-- Submit --}}
