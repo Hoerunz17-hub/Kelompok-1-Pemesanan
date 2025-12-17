@@ -8,53 +8,72 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginBackendController extends Controller
 {
+    // Halaman Login
     public function login()
     {
         return view('page.auth.login');
     }
 
+    // Proses Login
     public function authenticate(Request $request)
     {
-        // Validasi input
-        $credentials = $request->validate([
-            'email' => 'required|email',
+        // Validasi input (TERMASUK ROLE)
+        $request->validate([
+            'email'    => 'required|email',
             'password' => 'required',
+            'role'     => 'required|in:waiters,admin,super_admin',
         ]);
 
-        // Cek kredensial
-        if (!Auth::attempt($credentials)) {
-            return back()->with('error', 'Email atau password salah');
+        // Cek email + password SAJA
+        if (!Auth::attempt($request->only('email', 'password'))) {
+            return back()
+                ->withErrors(['login' => 'Email atau password salah'])
+                ->withInput();
         }
 
-        // Regenerasi session
         $request->session()->regenerate();
 
-        // Ambil role user
-        $role = Auth::user()->role;
+        $user = Auth::user();
 
-        switch ($role) {
-            case 'admin':
-                return redirect('/order');
+        // 🔥 CEK ROLE FORM vs DATABASE
+        if ($user->role !== $request->role) {
+            Auth::logout();
+            return back()
+                ->withErrors(['login' => 'Role tidak sesuai dengan akun'])
+                ->withInput();
+        }
 
-            case 'super_admin':
-                return redirect('/adminpanel');
+        // 🔒 CEK STATUS AKTIF
+        if ($user->is_active !== 'active') {
+            Auth::logout();
+            return back()
+                ->withErrors(['login' => 'Akun anda nonaktif'])
+                ->withInput();
+        }
 
+        // ✅ REDIRECT SESUAI ROLE
+        switch ($user->role) {
             case 'waiters':
-                return redirect('/');
+                return redirect()->route('frontend.home');
+
+            case 'admin':
+            case 'super_admin':
+                return redirect()->route('dashboard');
 
             default:
                 Auth::logout();
-                return redirect('/login')->with('error', 'Role tidak dikenali!');
+                return back()
+                    ->withErrors(['login' => 'Role tidak dikenali']);
         }
     }
 
+    // Logout
     public function logout()
     {
         Auth::logout();
-
         request()->session()->invalidate();
         request()->session()->regenerateToken();
 
-        return redirect('/login')->with('success', 'Berhasil logout');
+        return redirect()->route('login');
     }
 }
